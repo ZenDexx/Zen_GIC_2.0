@@ -730,19 +730,20 @@ const sections = {
 
 export default function QuizGIC() {
   const [section, setSection] = useState(""); // “Verdadero o Falso”, “Preguntas Trampa” o “Preguntas Comunes”
-  const [current, setCurrent] = useState(0); // Índice de la pregunta actual
-  const [score, setScore] = useState(0); // Puntaje acumulado
-  const [answers, setAnswers] = useState([]); // Para resultado final
-  const [selectedOption, setSelectedOption] = useState(""); // Opción elegida
-  const [showFeedback, setShowFeedback] = useState(false); // Para mostrar colores y justificación
+  const [current, setCurrent] = useState(0);   // Índice de la pregunta actual
+  const [score, setScore] = useState(0);       // Puntaje acumulado
+  const [answers, setAnswers] = useState([]);  // Para almacenar respuestas y justificaciones finales
+  const [selectedOption, setSelectedOption] = useState(""); // Opción elegida por el usuario
+  const [showFeedback, setShowFeedback] = useState(false);  // Controla si se muestra feedback (colores + justificación)
 
-  // Si no hay sección seleccionada, questions = []
+  // Si no hay sección seleccionada, questions = [] para evitar errores
   const questions = section ? sections[section] : [];
   const currentQuestion = questions[current];
 
-  // Cuando el usuario elige una opción
+  // Función que maneja cuando el usuario elige una opción
   const handleAnswer = (opt) => {
-    if (showFeedback) return; // bloquea doble-clic
+    if (showFeedback) return; // Evita doble-clic antes de avanzar
+
     setSelectedOption(opt);
     setShowFeedback(true);
 
@@ -751,7 +752,7 @@ export default function QuizGIC() {
       setScore((s) => s + 1);
     }
 
-    // Guardamos el registro para la pantalla de resultados finales
+    // Agrega al arreglo de respuestas con justificación
     setAnswers((arr) => [
       ...arr,
       {
@@ -763,7 +764,7 @@ export default function QuizGIC() {
     ]);
   };
 
-  // Al pulsar “Continuar” → avanzar a la siguiente pregunta
+  // Función para avanzar a la siguiente pregunta
   const handleNext = () => {
     setShowFeedback(false);
     setSelectedOption("");
@@ -771,12 +772,12 @@ export default function QuizGIC() {
     if (current + 1 < questions.length) {
       setCurrent((c) => c + 1);
     } else {
-      // Pasar al “Resultado Final”
+      // Si ya respondió la última, current pasará a questions.length → pantalla de Resultado Final
       setCurrent((c) => c + 1);
     }
   };
 
-  // Reset completo
+  // Reinicia todo el Quiz y vuelve al menú principal
   const resetQuiz = () => {
     setSection("");
     setCurrent(0);
@@ -787,8 +788,8 @@ export default function QuizGIC() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-gray-100 p-6 font-sans">
-      <div className="max-w-3xl mx-auto bg-[#111] p-6 rounded-2xl shadow-2xl">
+    <main className="min-h-screen bg-gray-900 text-gray-100 p-6 font-sans">
+      <div className="max-w-3xl mx-auto bg-gray-800 p-6 rounded-2xl shadow-xl">
         {/* ──────────────────────────────────────────────────── */}
         {/* ENCABEZADO PRINCIPAL */}
         <h1 className="text-3xl font-semibold text-center text-gray-100 mb-6">
@@ -797,7 +798,7 @@ export default function QuizGIC() {
 
         {/* ──────────────────────────────────────────────────── */}
         {/* MENÚ DE SECCIONES */}
-        <div className="flex justify-center gap-4 mb-6">
+        <div className="flex justify-center gap-3 mb-6">
           {Object.keys(sections).map((key) => (
             <button
               key={key}
@@ -809,10 +810,10 @@ export default function QuizGIC() {
                 setSelectedOption("");
                 setShowFeedback(false);
               }}
-              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
                 section === key
-                  ? "bg-gray-200 text-black"
-                  : "bg-gray-800 text-gray-100 hover:bg-gray-700"
+                  ? "bg-gray-600 text-gray-100"
+                  : "bg-gray-700 text-gray-200 hover:bg-gray-600"
               }`}
             >
               {key}
@@ -821,24 +822,22 @@ export default function QuizGIC() {
         </div>
 
         {/* ──────────────────────────────────────────────────── */}
-        {/* SIN SECCIÓN ELEGIDA: Mensaje “Seleccioná una categoría” */}
+        {/* PANTALLA INICIAL: Si no hay sección seleccionada */}
         {section === "" ? (
           <div className="text-center text-gray-400">
-            <p>Seleccioná una categoría para comenzar el quiz</p>
+            <p>Seleccioná una categoría para comenzar el Quiz</p>
           </div>
         ) : (
           <>
             {/* ──────────────────────────────────────────────────── */}
-            {/* SI current < questions.length → mostrar pregunta actual */}
+            {/* Si current < questions.length, mostramos la pregunta */}
             {current < questions.length ? (
               <div className="space-y-6">
                 {/* ───── CABECERA DE LA PREGUNTA (Número + Score) ───── */}
                 <div className="flex justify-between items-center text-sm text-gray-400">
-                  {/* Pregunta X de Y */}
                   <span>
                     Pregunta {current + 1} de {questions.length}
                   </span>
-                  {/* Puntuación: aciertos / total */}
                   <span>
                     Puntuación: {score} / {questions.length}
                   </span>
@@ -847,7 +846,7 @@ export default function QuizGIC() {
                 {/* ───── BARRA DE PROGRESO ───── */}
                 <div className="w-full bg-gray-700 h-2 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-white"
+                    className="h-full bg-gray-300"
                     style={{
                       width: `${((current + 1) / questions.length) * 100}%`
                     }}
@@ -862,27 +861,27 @@ export default function QuizGIC() {
                 {/* ───── OPCIONES ───── */}
                 <div className="flex flex-col gap-3">
                   {currentQuestion.options.map((opt, idx) => {
-                    // Definición de clases dinámicas
+                    // Definimos clases de estilo según el estado de la opción
                     let baseClass =
                       "flex items-center w-full border rounded-lg px-4 py-3 transition-colors duration-200 ";
 
                     if (!showFeedback) {
-                      // Antes de responder: borde gris, fondo gris oscuro
+                      // Antes de responder: borde gris medio, fondo gris oscuro
                       baseClass +=
-                        "border-gray-700 bg-gray-800 text-gray-100 hover:border-white hover:bg-gray-700";
+                        "border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600";
                     } else {
-                      // Después de responder: colorear
+                      // Después de responder: colorear según correcta/incorreta
                       if (opt === currentQuestion.answer) {
-                        // Respuesta correcta → borde y fondo verde
+                        // Opción correcta → fondo verde oscuro, borde verde medio
                         baseClass +=
-                          "bg-green-700 border-green-600 text-white";
+                          "bg-green-800 border-green-600 text-green-200";
                       } else if (opt === selectedOption) {
-                        // Opción elegida y es incorrecta → borde y fondo rojo
-                        baseClass += "bg-red-700 border-red-600 text-white";
+                        // Opción elegida e incorrecta → fondo rojo oscuro, borde rojo medio
+                        baseClass += "bg-red-800 border-red-600 text-red-200";
                       } else {
-                        // Resto de opciones → opacas
+                        // Resto de opciones → fondo gris oscuro, opacidad reducida
                         baseClass +=
-                          "bg-gray-800 border-gray-700 text-gray-400 opacity-70";
+                          "bg-gray-700 border-gray-600 text-gray-400 opacity-70";
                       }
                     }
 
@@ -893,7 +892,7 @@ export default function QuizGIC() {
                         className={baseClass}
                         disabled={showFeedback}
                       >
-                        {/* “Radio button” ficticio */}
+                        {/* “Indicador” tipo radio sin funcional: círculo que se colorea */}
                         <span
                           className={`mr-3 flex-shrink-0 h-5 w-5 rounded-full border-2 ${
                             !showFeedback
@@ -902,7 +901,7 @@ export default function QuizGIC() {
                               ? "border-green-400 bg-green-400"
                               : opt === selectedOption
                               ? "border-red-400 bg-red-400"
-                              : "border-gray-500 bg-gray-800"
+                              : "border-gray-500 bg-gray-700"
                           }`}
                         ></span>
                         <span className="text-left">{opt}</span>
@@ -913,13 +912,13 @@ export default function QuizGIC() {
 
                 {/* ───── JUSTIFICACIÓN + BOTÓN “Continuar” ───── */}
                 {showFeedback && (
-                  <div className="mt-4 bg-gray-900 p-4 rounded-lg space-y-4">
+                  <div className="mt-4 bg-gray-700 p-4 rounded-lg space-y-4">
                     <p className="text-sm italic text-gray-300">
                       💡 {currentQuestion.justification}
                     </p>
                     <button
                       onClick={handleNext}
-                      className="w-full bg-white text-black font-medium py-2 rounded-lg hover:bg-gray-200 transition"
+                      className="w-full bg-gray-300 text-gray-900 font-medium py-2 rounded-lg hover:bg-gray-200 transition"
                     >
                       Continuar
                     </button>
@@ -931,15 +930,16 @@ export default function QuizGIC() {
               /* RESULTADO FINAL: cuando current === questions.length */
               /* ──────────────────────────────────────────────────── */
               <div className="space-y-6">
-                {/* ───── TARJETA DE RESULTADOS ───── */}
-                <div className="bg-gray-900 border border-gray-700 rounded-lg p-6 space-y-4">
+                {/* ───── TARJETA CON RESULTADOS ───── */}
+                <div className="bg-gray-700 border border-gray-600 rounded-lg p-6 space-y-4">
                   <h2 className="text-2xl font-semibold text-gray-100">
                     Resultados Finales
                   </h2>
-                  <p className="text-xl font-bold text-yellow-500">
-                    {(score / questions.length) * 10 >= 0
-                      ? ((score / questions.length) * 10).toFixed(1)
-                      : "0.0"}{" "}
+                  <p className="text-xl font-bold text-gray-100">
+                    Nota:{" "}
+                    <span className="text-green-400">
+                      {((score / questions.length) * 10).toFixed(1)}
+                    </span>{" "}
                     / 10
                   </p>
 
@@ -966,15 +966,15 @@ export default function QuizGIC() {
                   </p>
                 </div>
 
-                {/* ───── LISTADO DE RESULTADOS POR PREGUNTA ───── */}
+                {/* ───── LISTADO DE RESPUESTAS DETALLADAS ───── */}
                 <div className="flex flex-col gap-4">
                   {answers.map((ans, i) => (
                     <div
                       key={i}
                       className={`p-4 border rounded-lg ${
                         ans.correct
-                          ? "border-green-600 bg-green-950"
-                          : "border-red-600 bg-red-950"
+                          ? "bg-green-900 border-green-600"
+                          : "bg-red-900 border-red-600"
                       }`}
                     >
                       <p className="font-medium text-gray-100">
@@ -982,14 +982,14 @@ export default function QuizGIC() {
                       </p>
                       <p
                         className={`mt-2 text-sm ${
-                          ans.correct ? "text-green-400" : "text-red-400"
+                          ans.correct ? "text-green-200" : "text-red-200"
                         }`}
                       >
                         Tu respuesta: {ans.selected}{" "}
                         {ans.correct ? "(Correcta)" : "(Incorrecta)"}
                       </p>
                       {!ans.correct && (
-                        <p className="mt-1 text-sm text-green-400">
+                        <p className="mt-1 text-sm text-green-200">
                           Respuesta correcta: {questions[i].answer}
                         </p>
                       )}
@@ -1003,7 +1003,7 @@ export default function QuizGIC() {
                 {/* ───── BOTÓN “Volver al menú” ───── */}
                 <button
                   onClick={resetQuiz}
-                  className="w-full bg-white text-black font-medium py-2 rounded-lg hover:bg-gray-200 transition"
+                  className="w-full bg-gray-300 text-gray-900 font-medium py-2 rounded-lg hover:bg-gray-200 transition"
                 >
                   Volver al menú
                 </button>
@@ -1015,3 +1015,4 @@ export default function QuizGIC() {
     </main>
   );
 }
+ 
