@@ -11,7 +11,7 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
-        "Aunque la globalización puede amenazar lenguas pequeñas, no elimina todas las lenguas autóctonas; muchas se preservan mediante políticas culturales."
+        "Aunque la globalización puede amenazar lenguas pequeñas, muchas se preservan mediante políticas culturales y resistencia local."
     },
     {
       question:
@@ -19,7 +19,7 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "La Primera Globalización abarca desde el Descubrimiento de América (1492) hasta el siglo XIX, momento en que el Imperio Español conectó continentes."
+        "La Primera Globalización abarca desde el Descubrimiento de América (1492) hasta el siglo XIX, cuando el Imperio Español conectó continentes."
     },
     {
       question:
@@ -43,7 +43,7 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "Con la globalización política, el Estado-nación debe compartir poder con Naciones Unidas, OMC y ONG transnacionales."
+        "Con la globalización política, el Estado-nación comparte poder con organismos multilaterales y ONG transnacionales."
     },
     {
       question:
@@ -51,7 +51,7 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
-        "La globalización económica contemporánea abarca flujos de bienes, servicios, capital, tecnología e información."
+        "La globalización económica incluye flujos de bienes, servicios, capital, tecnología e información."
     },
     {
       question:
@@ -59,7 +59,7 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "La crisis asiática fue apodada “efecto Dragón” y la rusa de 1998 “efecto Vodka” por su impacto financiero global."
+        "La crisis asiática fue llamada “efecto Dragón” y la rusa de 1998 “efecto Vodka” por su impacto financiero global."
     },
     {
       question:
@@ -67,7 +67,7 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
-        "El RGPD solo protege datos de personas físicas. Las personas jurídicas se rigen por otros regímenes de confidencialidad."
+        "El RGPD protege datos de personas físicas; las personas jurídicas tienen otras protecciones legales diferentes."
     },
     {
       question:
@@ -75,7 +75,7 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "La Ley 25.326 de 2000 fue una de las primeras en Latinoamérica en crear un marco fuerte de protección de datos."
+        "La Ley 25.326 de 2000 fue una de las primeras en Latinoamérica en crear un marco regulatorio fuerte para protección de datos."
     },
     {
       question:
@@ -83,7 +83,7 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "La ley excluye de su aplicación a bases de datos con fines estadísticos siempre que los datos estén disociados de la identidad."
+        "La ley excluye de su aplicación a bases de datos con fines estadísticos siempre que los datos estén anonimizados."
     },
     {
       question:
@@ -91,7 +91,7 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
-        "La Ley 25.326 exige que el consentimiento sea libre, expreso e informado: no admite consentimiento tácito."
+        "La Ley 25.326 exige que el consentimiento sea libre, expreso e informado; no admite consentimiento tácito."
     },
     {
       question:
@@ -103,7 +103,7 @@ const sections = {
     },
     {
       question:
-        "13. El Delegado de Protección de Datos (DPO) es obligatorio para todas las empresas argentinas, sin importar tamaño.",
+        "13. El Delegado de Protección de Datos (DPO) es obligatorio para todas las empresas argentinas, sin importar su tamaño.",
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
@@ -115,7 +115,7 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "Cuando un tratamiento de datos implica alto riesgo (sensibilidad, volumen, contexto), se requiere la evaluación de impacto."
+        "Cuando un tratamiento de datos implica alto riesgo (por sensibilidad, volumen, contexto), se requiere la evaluación de impacto."
     },
     {
       question:
@@ -139,7 +139,7 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
-        "La ley aplica a responsables fuera de Argentina que monitorean comportamientos de usuarios argentinos, lo que incluye cookies."
+        "La ley aplica a responsables fuera de Argentina que monitorean comportamientos de usuarios argentinos, incluyendo cookies."
     },
     {
       question:
@@ -180,7 +180,7 @@ const sections = {
       ],
       answer: "Fue impulsada principalmente por la Revolución Industrial",
       justification:
-        "La Primera Globalización se impulsó por el descubrimiento de América y la expansión española, no por la Revolución Industrial (esa corresponde a la Segunda)."
+        "La Primera Globalización se impulsó por el descubrimiento de América y la expansión española, no por la Revolución Industrial."
     },
     {
       question:
@@ -203,18 +203,18 @@ const sections = {
         "Busca la integración de las economías nacionales",
         "Se caracteriza por flujos transfronterizos de bienes y tecnologías",
         "Sincroniza automáticamente políticas fiscales de todos los países",
-        "Favorece la interdependencia de los mercados financieros",
+        "Favorece la interdependencia de mercados financieros",
         "Impulsa la liberalización del comercio"
       ],
       answer: "Sincroniza automáticamente políticas fiscales de todos los países",
       justification:
-        "La globalización económica no sincroniza políticas fiscales: cada país mantiene sus decisiones fiscales."
+        "La globalización económica no sincroniza políticas fiscales: cada país mantiene sus propias decisiones fiscales."
     },
     {
       question:
         "4. Respecto a la globalización política, ¿cuál oración es ERRÓNEA?",
       options: [
-        "Reduce la relevancia exclusiva del Estado-nación",
+        "Reduce la relevancia exclusiva del Estado‐nación",
         "Impulsa la gobernanza multinivel",
         "Establece que todos los países adoptan la misma constitución",
         "Eleva el papel de las ONG internacionales",
@@ -236,7 +236,7 @@ const sections = {
       ],
       answer: "Imperio Español como actor dominante",
       justification:
-        "El Imperio Español fue protagonista de la Primera Globalización, no de la Segunda (que inicia con la posguerra fría)."
+        "El Imperio Español fue protagonista de la Primera Globalización, no de la Segunda (que inicia en la posguerra fría)."
     },
     {
       question:
@@ -334,7 +334,7 @@ const sections = {
       ],
       answer: "Invención del código Morse (1837)",
       justification:
-        "El código Morse mejoró comunicaciones, pero no se menciona como antecedente directo de globalización; los otros sí aparecen."
+        "Aunque el código Morse mejoró comunicaciones, no se menciona como antecedente directo de globalización; los otros sí aparecen."
     },
     {
       question:
@@ -352,7 +352,7 @@ const sections = {
     },
     {
       question:
-        "14. ¿Cuál de los siguientes no corresponde a un principio de la Ley 25.326?",
+        "14. ¿Cuál de los siguientes no es un principio de la Ley 25.326?",
       options: [
         "Finalidad",
         "Consentimiento",
@@ -362,7 +362,7 @@ const sections = {
       ],
       answer: "Ejecución automática de decisiones",
       justification:
-        "La Ley 25.326 no contempla la ejecución automática de decisiones como principio; ese concepto se asocia a derechos digitales."
+        "La Ley 25.326 no contempla la ejecución automática de decisiones como principio; ese concepto está en derechos digitales modernos."
     },
     {
       question:
@@ -440,7 +440,7 @@ const sections = {
       ],
       answer: "El proyecto de modificación introduce portabilidad y revisión humana",
       justification:
-        "El proyecto actual incorpora derechos digitales como portabilidad y revisión humana; la Ley original no los tenía."
+        "El proyecto incorpora derechos digitales como portabilidad y revisión humana; la Ley original no los tenía."
     }
   ],
 
@@ -485,7 +485,7 @@ const sections = {
       ],
       answer: "Invención de la imprenta en el siglo XV",
       justification:
-        "Aunque la imprenta es relevante histórico, el PDF no la menciona como antecedente directo de la globalización moderna."
+        "Aunque la imprenta es relevante, el PDF no la menciona como antecedente directo de la globalización moderna."
     },
     {
       question:
@@ -732,17 +732,17 @@ export default function QuizGIC() {
   const [section, setSection] = useState(""); // “Verdadero o Falso”, “Preguntas Trampa” o “Preguntas Comunes”
   const [current, setCurrent] = useState(0);   // Índice de la pregunta actual
   const [score, setScore] = useState(0);       // Puntaje acumulado
-  const [answers, setAnswers] = useState([]);  // Para almacenar respuestas y justificaciones finales
-  const [selectedOption, setSelectedOption] = useState(""); // Opción elegida por el usuario
-  const [showFeedback, setShowFeedback] = useState(false);  // Controla si se muestra feedback (colores + justificación)
+  const [answers, setAnswers] = useState([]);  // Para almacenar respuestas + justificaciones
+  const [selectedOption, setSelectedOption] = useState(""); // Opción elegida
+  const [showFeedback, setShowFeedback] = useState(false);  // Control para mostrar feedback
 
-  // Si no hay sección seleccionada, questions = [] para evitar errores
+  // Si no hay sección seleccionada, evitamos Crash: questions = []
   const questions = section ? sections[section] : [];
   const currentQuestion = questions[current];
 
-  // Función que maneja cuando el usuario elige una opción
+  // Cuando el usuario elige una opción
   const handleAnswer = (opt) => {
-    if (showFeedback) return; // Evita doble-clic antes de avanzar
+    if (showFeedback) return; // evita múltiples clics sin avanzar
 
     setSelectedOption(opt);
     setShowFeedback(true);
@@ -752,7 +752,7 @@ export default function QuizGIC() {
       setScore((s) => s + 1);
     }
 
-    // Agrega al arreglo de respuestas con justificación
+    // Registramos en answers para poder mostrar al final
     setAnswers((arr) => [
       ...arr,
       {
@@ -764,7 +764,7 @@ export default function QuizGIC() {
     ]);
   };
 
-  // Función para avanzar a la siguiente pregunta
+  // Avanzar a la siguiente pregunta
   const handleNext = () => {
     setShowFeedback(false);
     setSelectedOption("");
@@ -772,12 +772,12 @@ export default function QuizGIC() {
     if (current + 1 < questions.length) {
       setCurrent((c) => c + 1);
     } else {
-      // Si ya respondió la última, current pasará a questions.length → pantalla de Resultado Final
+      // Si era la última pregunta, current → questions.length → mostrará resultado final
       setCurrent((c) => c + 1);
     }
   };
 
-  // Reinicia todo el Quiz y vuelve al menú principal
+  // Reiniciar todo y regresar al menú
   const resetQuiz = () => {
     setSection("");
     setCurrent(0);
@@ -788,15 +788,13 @@ export default function QuizGIC() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-900 text-gray-100 p-6 font-sans">
-      <div className="max-w-3xl mx-auto bg-gray-800 p-6 rounded-2xl shadow-xl">
-        {/* ──────────────────────────────────────────────────── */}
-        {/* ENCABEZADO PRINCIPAL */}
-        <h1 className="text-3xl font-semibold text-center text-gray-100 mb-6">
-          Quiz GIC
-        </h1>
+    <main className="min-h-screen bg-black text-white p-6 font-sans">
+      <div className="max-w-3xl mx-auto bg-black border border-gray-800 p-6 rounded-2xl shadow-xl">
+        {/* ────────────────────────────────────────────── */}
+        {/* ENCABEZADO */}
+        <h1 className="text-3xl font-bold text-center mb-6">Quiz GIC</h1>
 
-        {/* ──────────────────────────────────────────────────── */}
+        {/* ────────────────────────────────────────────── */}
         {/* MENÚ DE SECCIONES */}
         <div className="flex justify-center gap-3 mb-6">
           {Object.keys(sections).map((key) => (
@@ -812,8 +810,8 @@ export default function QuizGIC() {
               }}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
                 section === key
-                  ? "bg-gray-600 text-gray-100"
-                  : "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                  ? "bg-gray-700 text-white"
+                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
               }`}
             >
               {key}
@@ -821,19 +819,19 @@ export default function QuizGIC() {
           ))}
         </div>
 
-        {/* ──────────────────────────────────────────────────── */}
-        {/* PANTALLA INICIAL: Si no hay sección seleccionada */}
+        {/* ────────────────────────────────────────────── */}
+        {/* PANTALLA INICIAL (sin sección seleccionada) */}
         {section === "" ? (
           <div className="text-center text-gray-400">
             <p>Seleccioná una categoría para comenzar el Quiz</p>
           </div>
         ) : (
           <>
-            {/* ──────────────────────────────────────────────────── */}
-            {/* Si current < questions.length, mostramos la pregunta */}
+            {/* ────────────────────────────────────────────── */}
+            {/* PREGUNTA VISIBLE mientras current < questions.length */}
             {current < questions.length ? (
               <div className="space-y-6">
-                {/* ───── CABECERA DE LA PREGUNTA (Número + Score) ───── */}
+                {/* CABECERA DE PREGUNTA (Número + Score) */}
                 <div className="flex justify-between items-center text-sm text-gray-400">
                   <span>
                     Pregunta {current + 1} de {questions.length}
@@ -843,45 +841,43 @@ export default function QuizGIC() {
                   </span>
                 </div>
 
-                {/* ───── BARRA DE PROGRESO ───── */}
-                <div className="w-full bg-gray-700 h-2 rounded-full overflow-hidden">
+                {/* BARRA DE PROGRESO */}
+                <div className="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gray-300"
+                    className="h-full bg-green-400"
                     style={{
                       width: `${((current + 1) / questions.length) * 100}%`
                     }}
                   ></div>
                 </div>
 
-                {/* ───── TEXTO DE LA PREGUNTA ───── */}
-                <h2 className="text-lg font-medium text-gray-100">
-                  {currentQuestion.question}
-                </h2>
+                {/* TEXTO DE LA PREGUNTA */}
+                <h2 className="text-lg font-medium">{currentQuestion.question}</h2>
 
-                {/* ───── OPCIONES ───── */}
+                {/* OPCIONES */}
                 <div className="flex flex-col gap-3">
                   {currentQuestion.options.map((opt, idx) => {
-                    // Definimos clases de estilo según el estado de la opción
+                    // Definimos clases base
                     let baseClass =
-                      "flex items-center w-full border rounded-lg px-4 py-3 transition-colors duration-200 ";
+                      "flex items-center w-full border-2 rounded-lg px-4 py-3 transition-colors duration-200 ";
 
                     if (!showFeedback) {
-                      // Antes de responder: borde gris medio, fondo gris oscuro
+                      // Antes de responder: fondo negro, borde gris oscuro, texto gris claro
                       baseClass +=
-                        "border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600";
+                        "bg-black border-gray-700 text-gray-300 hover:bg-gray-800";
                     } else {
-                      // Después de responder: colorear según correcta/incorreta
+                      // Después de responder: coloreamos según si es correcta/incorreta
                       if (opt === currentQuestion.answer) {
-                        // Opción correcta → fondo verde oscuro, borde verde medio
+                        // Opción correcta: borde y texto neón verde
                         baseClass +=
-                          "bg-green-800 border-green-600 text-green-200";
+                          "bg-black border-green-400 text-green-400";
                       } else if (opt === selectedOption) {
-                        // Opción elegida e incorrecta → fondo rojo oscuro, borde rojo medio
-                        baseClass += "bg-red-800 border-red-600 text-red-200";
+                        // Opción elegida incorrecta: neón rojo
+                        baseClass += "bg-black border-red-400 text-red-400";
                       } else {
-                        // Resto de opciones → fondo gris oscuro, opacidad reducida
+                        // Resto de opciones tras responder: opacidad reducida
                         baseClass +=
-                          "bg-gray-700 border-gray-600 text-gray-400 opacity-70";
+                          "bg-black border-gray-700 text-gray-500 opacity-60";
                       }
                     }
 
@@ -892,16 +888,16 @@ export default function QuizGIC() {
                         className={baseClass}
                         disabled={showFeedback}
                       >
-                        {/* “Indicador” tipo radio sin funcional: círculo que se colorea */}
+                        {/* “Indicador” tipo radio: círculo que se ilumina */}
                         <span
                           className={`mr-3 flex-shrink-0 h-5 w-5 rounded-full border-2 ${
                             !showFeedback
-                              ? "border-gray-500"
+                              ? "border-gray-600"
                               : opt === currentQuestion.answer
                               ? "border-green-400 bg-green-400"
                               : opt === selectedOption
                               ? "border-red-400 bg-red-400"
-                              : "border-gray-500 bg-gray-700"
+                              : "border-gray-600 bg-black"
                           }`}
                         ></span>
                         <span className="text-left">{opt}</span>
@@ -910,15 +906,15 @@ export default function QuizGIC() {
                   })}
                 </div>
 
-                {/* ───── JUSTIFICACIÓN + BOTÓN “Continuar” ───── */}
+                {/* JUSTIFICACIÓN + BOTÓN “Continuar” */}
                 {showFeedback && (
-                  <div className="mt-4 bg-gray-700 p-4 rounded-lg space-y-4">
+                  <div className="mt-4 bg-gray-900 p-4 rounded-lg space-y-4">
                     <p className="text-sm italic text-gray-300">
                       💡 {currentQuestion.justification}
                     </p>
                     <button
                       onClick={handleNext}
-                      className="w-full bg-gray-300 text-gray-900 font-medium py-2 rounded-lg hover:bg-gray-200 transition"
+                      className="w-full bg-green-400 text-black font-medium py-2 rounded-lg hover:bg-green-300 transition"
                     >
                       Continuar
                     </button>
@@ -926,16 +922,13 @@ export default function QuizGIC() {
                 )}
               </div>
             ) : (
-              /* ──────────────────────────────────────────────────── */
-              /* RESULTADO FINAL: cuando current === questions.length */
-              /* ──────────────────────────────────────────────────── */
+              /* ────────────────────────────────────────────── */
+              /* PANTALLA DE RESULTADO FINAL (cuando current === questions.length) */
               <div className="space-y-6">
-                {/* ───── TARJETA CON RESULTADOS ───── */}
-                <div className="bg-gray-700 border border-gray-600 rounded-lg p-6 space-y-4">
-                  <h2 className="text-2xl font-semibold text-gray-100">
-                    Resultados Finales
-                  </h2>
-                  <p className="text-xl font-bold text-gray-100">
+                {/* TARJETA DE RESULTADOS */}
+                <div className="bg-gray-900 border border-gray-700 rounded-lg p-6 space-y-4">
+                  <h2 className="text-2xl font-semibold">Resultados Finales</h2>
+                  <p className="text-xl font-bold">
                     Nota:{" "}
                     <span className="text-green-400">
                       {((score / questions.length) * 10).toFixed(1)}
@@ -943,7 +936,7 @@ export default function QuizGIC() {
                     / 10
                   </p>
 
-                  <p className="text-gray-300">
+                  <p className="text-gray-400">
                     {score >= questions.length * 0.7
                       ? "¡Promocionado!"
                       : score >= questions.length * 0.4
@@ -951,45 +944,42 @@ export default function QuizGIC() {
                       : "No aprobado. Volvé a intentar."}
                   </p>
 
-                  {/* ───── BARRA DE PROGRESO FINAL ───── */}
-                  <div className="w-full bg-gray-700 h-2 rounded-full overflow-hidden">
+                  {/* BARRA DE PROGRESO FINAL */}
+                  <div className="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-green-500"
+                      className="h-full bg-green-400"
                       style={{
                         width: `${(score / questions.length) * 100}%`
                       }}
                     ></div>
                   </div>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-gray-500">
                     Respuestas correctas: {score} de {questions.length} | Nota
-                    mínima para aprobar 7.0
+                    mínima para aprobar: 7.0
                   </p>
                 </div>
 
-                {/* ───── LISTADO DE RESPUESTAS DETALLADAS ───── */}
+                {/* LISTADO DETALLADO DE CADA RESPUESTA */}
                 <div className="flex flex-col gap-4">
                   {answers.map((ans, i) => (
                     <div
                       key={i}
-                      className={`p-4 border rounded-lg ${
+                      className={`p-4 border-2 rounded-lg ${
                         ans.correct
-                          ? "bg-green-900 border-green-600"
-                          : "bg-red-900 border-red-600"
+                          ? "bg-black border-green-400 text-green-400"
+                          : "bg-black border-red-400 text-red-400"
                       }`}
                     >
-                      <p className="font-medium text-gray-100">
-                        {i + 1}. {ans.question}
-                      </p>
-                      <p
-                        className={`mt-2 text-sm ${
-                          ans.correct ? "text-green-200" : "text-red-200"
-                        }`}
-                      >
-                        Tu respuesta: {ans.selected}{" "}
-                        {ans.correct ? "(Correcta)" : "(Incorrecta)"}
+                      <p className="font-medium">{i + 1}. {ans.question}</p>
+                      <p className="mt-1 text-sm">
+                        Tu respuesta:{" "}
+                        <span className={`${ans.correct ? "text-green-400" : "text-red-400"}`}>
+                          {ans.selected}{" "}
+                          {ans.correct ? "(Correcta)" : "(Incorrecta)"}
+                        </span>
                       </p>
                       {!ans.correct && (
-                        <p className="mt-1 text-sm text-green-200">
+                        <p className="mt-1 text-sm text-green-400">
                           Respuesta correcta: {questions[i].answer}
                         </p>
                       )}
@@ -1000,10 +990,10 @@ export default function QuizGIC() {
                   ))}
                 </div>
 
-                {/* ───── BOTÓN “Volver al menú” ───── */}
+                {/* BOTÓN “Volver al menú” */}
                 <button
                   onClick={resetQuiz}
-                  className="w-full bg-gray-300 text-gray-900 font-medium py-2 rounded-lg hover:bg-gray-200 transition"
+                  className="w-full bg-green-400 text-black font-medium py-2 rounded-lg hover:bg-green-300 transition"
                 >
                   Volver al menú
                 </button>
@@ -1015,4 +1005,4 @@ export default function QuizGIC() {
     </main>
   );
 }
- 
+
