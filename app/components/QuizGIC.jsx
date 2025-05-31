@@ -914,7 +914,7 @@ export default function QuizGIC() {
                     </p>
                     <button
                       onClick={handleNext}
-                      className="w-full bg-green-400 text-black font-medium py-2 rounded-lg hover:bg-green-300 transition"
+                      className="w-full bg-gray-300 text-gray-900 font-medium py-2 rounded-lg hover:bg-gray-200 transition"
                     >
                       Continuar
                     </button>
