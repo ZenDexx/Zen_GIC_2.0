@@ -735,11 +735,14 @@ const sections = {
 };
 
 export default function QuizGIC() {
-  const [section, setSection] = useState("Verdadero o Falso");
+  // 1) Estado inicial de 'section' VACÍO:
+  const [section, setSection] = useState("");
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState([]);
-  const questions = sections[section];
+
+  // Si section === "" entonces la variable questions es indefinida; chequeamos más abajo
+  const questions = section ? sections[section] : [];
   const currentQuestion = questions[current];
 
   const handleAnswer = (option) => {
@@ -770,13 +773,15 @@ export default function QuizGIC() {
       <div className="max-w-3xl mx-auto bg-[#111] p-6 rounded-2xl shadow-2xl">
         <h1 className="text-4xl font-bold text-center text-gray-100 mb-4">Quiz GIC</h1>
 
+        {/* ─────────────────────────────────────────────────────── */}
+        {/* 2) Menú de botones siempre visible, incluso si section=="" */}
         <div className="flex justify-center gap-4 mb-6">
           {Object.keys(sections).map((key) => (
             <button
               key={key}
               onClick={() => {
-                setSection(key);
-                resetQuiz();
+                setSection(key);   // selecciona la sección
+                resetQuiz();       // reinicia preguntas/puntaje
               }}
               className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
                 section === key
@@ -788,69 +793,93 @@ export default function QuizGIC() {
             </button>
           ))}
         </div>
+        {/* ─────────────────────────────────────────────────────── */}
 
-        {current < questions.length ? (
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current}
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.5 }}
-              className="mb-6"
-            >
-              <h2 className="text-xl mb-4 text-gray-300">{currentQuestion.question}</h2>
-              <div className="space-y-4">
-                {currentQuestion.options.map((opt, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => handleAnswer(opt)}
-                    className="block w-full text-left px-5 py-3 bg-gray-800 text-gray-100 hover:bg-white hover:text-black transition-colors duration-300 rounded-xl shadow-md"
-                  >
-                    {opt}
-                  </button>
-                ))}
-              </div>
-              <p className="text-sm text-right text-gray-400 mt-4">
-                Pregunta {current + 1} de {questions.length}
-              </p>
-            </motion.div>
-          </AnimatePresence>
-        ) : (
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-100 mb-4">Resultado Final</h2>
-            <p className="mb-2">
-              Puntaje: {score} / {questions.length}
-            </p>
-            <p className="mb-6">
-              {score >= questions.length * 0.7
-                ? "¡Promocionado!"
-                : score >= questions.length * 0.4
-                ? "¡Aprobado!"
-                : "No aprobado. Volvé a intentar."}
-            </p>
-            <div className="text-left space-y-4">
-              {answers.map((ans, i) => (
-                <div
-                  key={i}
-                  className={`p-4 rounded-xl ${ans.correct ? "bg-green-800" : "bg-red-800"}`}
-                >
-                  <p className="font-semibold text-white">{ans.question}</p>
-                  <p className="text-sm">Tu respuesta: {ans.selected}</p>
-                  <p className="text-sm">Correcta: {questions[i].answer}</p>
-                  <p className="text-xs text-gray-300 mt-1 italic">
-                    💡 Justificación: {ans.justification}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <button
-              onClick={resetQuiz}
-              className="mt-6 bg-yellow-500 text-black px-6 py-2 rounded-lg font-semibold hover:bg-yellow-600 transition"
-            >
-              Reintentar
-            </button>
+        {/* 3) Si aún no se seleccionó ninguna sección, NO mostramos preguntas ni resultados */}
+        {section === "" ? (
+          <div className="text-center text-gray-400">
+            <p>Seleccioná una de las tres opciones para comenzar el quiz.</p>
           </div>
+        ) : (
+          // ─────────────────────────────────────────────────────────
+          // 4) Aquí va TODO el bloque que ya tenías de preguntas + resultado
+          //    (solo se renderiza si 'section' NO está vacío)
+          // ─────────────────────────────────────────────────────────
+          <>
+            {current < questions.length ? (
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.5 }}
+                  className="mb-6"
+                >
+                  <h2 className="text-xl mb-4 text-gray-300">
+                    {currentQuestion.question}
+                  </h2>
+                  <div className="space-y-4">
+                    {currentQuestion.options.map((opt, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleAnswer(opt)}
+                        className="block w-full text-left px-5 py-3 bg-gray-800 text-gray-100 hover:bg-white hover:text-black transition-colors duration-300 rounded-xl shadow-md"
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  <p className="text-sm text-right text-gray-400 mt-4">
+                    Pregunta {current + 1} de {questions.length}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            ) : (
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-gray-100 mb-4">
+                  Resultado Final
+                </h2>
+                <p className="mb-2">
+                  Puntaje: {score} / {questions.length}
+                </p>
+                <p className="mb-6">
+                  {score >= questions.length * 0.7
+                    ? "¡Promocionado!"
+                    : score >= questions.length * 0.4
+                    ? "¡Aprobado!"
+                    : "No aprobado. Volvé a intentar."}
+                </p>
+                <div className="text-left space-y-4">
+                  {answers.map((ans, i) => (
+                    <div
+                      key={i}
+                      className={`p-4 rounded-xl ${
+                        ans.correct ? "bg-green-800" : "bg-red-800"
+                      }`}
+                    >
+                      <p className="font-semibold text-white">
+                        {ans.question}
+                      </p>
+                      <p className="text-sm">Tu respuesta: {ans.selected}</p>
+                      <p className="text-sm">
+                        Correcta: {questions[i].answer}
+                      </p>
+                      <p className="text-xs text-gray-300 mt-1 italic">
+                        💡 Justificación: {ans.justification}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  onClick={resetQuiz}
+                  className="mt-6 bg-yellow-500 text-black px-6 py-2 rounded-lg font-semibold hover:bg-yellow-600 transition"
+                >
+                  Reintentar
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </main>
