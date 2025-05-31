@@ -1,7 +1,7 @@
+// app/components/QuizGIC.jsx
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 
 const sections = {
   "Verdadero o Falso": [
@@ -11,7 +11,7 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
-        "Aunque la globalización puede amenazar lenguas pequeñas, no elimina todas las lenguas autóctonas; muchas se mantienen por políticas de preservación cultural."
+        "Aunque la globalización puede amenazar lenguas pequeñas, no elimina todas las lenguas autóctonas; muchas se preservan mediante políticas culturales."
     },
     {
       question:
@@ -19,15 +19,15 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "La Primera Globalización abarca desde el Descubrimiento de América (1492) hasta el siglo XIX, con el Imperio Español unificando comercio y culturas a escala mundial."
+        "La Primera Globalización abarca desde el Descubrimiento de América (1492) hasta el siglo XIX, momento en que el Imperio Español conectó continentes."
     },
     {
       question:
-        "3. El Consenso de Washington (1989) es considerado un hito que definió políticas clave del neoliberalismo en las economías latinoamericanas.",
+        "3. El Consenso de Washington (1989) definió políticas básicas del neoliberalismo en economías latinoamericanas.",
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "El Consenso de Washington estableció diez recomendaciones (liberalización, privatización, disciplina fiscal) que influyeron ampliamente en políticas económicas de América Latina."
+        "El Consenso de Washington estableció diez recomendaciones económicas (disciplina fiscal, liberalización, etc.) que influyeron en Latinoamérica."
     },
     {
       question:
@@ -35,135 +35,135 @@ const sections = {
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
-        "La caída del Muro de Berlín simboliza la disolución del bloque comunista, pero la Segunda Globalización se extiende hasta la actualidad, impulsada por la revolución informática y la liberalización económica."
+        "La caída del Muro simboliza el fin de la Guerra Fría, pero la Segunda Globalización continúa hasta hoy con la revolución tecnológica."
     },
     {
       question:
-        "5. La globalización política implica la disminución de la importancia del Estado-nación y el ascenso de actores internacionales como ONG y organismos multilaterales.",
+        "5. La globalización política implica la disminución del Estado-nación y el ascenso de actores internacionales como ONG.",
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "Con la globalización política, el Estado-nación cede parte de su poder a organismos como la ONU, la OMC, y a ONG transnacionales que influyen en políticas globales."
+        "Con la globalización política, el Estado-nación debe compartir poder con Naciones Unidas, OMC y ONG transnacionales."
     },
     {
       question:
-        "6. La globalización económica contemporánea se basa en un movimiento internacional de bienes, capital, servicios, tecnología e información.",
-      options: ["Verdadero", "Falso"],
-      answer: "Verdadero",
-      justification:
-        "La globalización económica implica la integración de mercados nacionales a través de flujos transfronterizos de mercancías, capital financiero, servicios y tecnología."
-    },
-    {
-      question:
-        "7. Las crisis financieras asiática (1997) y rusa (1998) se conocen popularmente como “efecto Dragón” y “efecto Vodka” respectivamente.",
-      options: ["Verdadero", "Falso"],
-      answer: "Verdadero",
-      justification:
-        "La crisis asiática se llamó “efecto Dragón” y la crisis rusa de 1998, “efecto Vodka”, por su impacto económico global y denominaciones coloquiales."
-    },
-    {
-      question:
-        "8. El RGPD (Reglamento General de Protección de Datos) europeo protege tanto a personas físicas como a personas jurídicas (empresas).",
+        "6. La globalización económica contemporánea consiste únicamente en intercambio de bienes, sin incluir tecnología ni servicios.",
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
-        "El RGPD protege únicamente a personas físicas, no a personas jurídicas; las empresas se rigen por otros regímenes (confidencialidad comercial, competencia, etc.)."
+        "La globalización económica contemporánea abarca flujos de bienes, servicios, capital, tecnología e información."
     },
     {
       question:
-        "9. En Argentina, la Ley 25.326 (Protección de Datos Personales) fue sancionada en el año 2000 y es pionera en Latinoamérica.",
+        "7. Las crisis asiática (1997) y rusa (1998) se conocen como “efecto Dragón” y “efecto Vodka” respectivamente.",
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "La Ley 25.326 fue sancionada en 2000 y sirvió de referencia regional para normas de privacidad y protección de datos."
+        "La crisis asiática fue apodada “efecto Dragón” y la rusa de 1998 “efecto Vodka” por su impacto financiero global."
     },
     {
       question:
-        "10. Según la Ley 25.326, los datos personales recopilados con fines estadísticos están exentos del régimen legal, incluso si pueden relacionarse a un individuo identificable.",
+        "8. El RGPD europeo protege tanto a personas físicas como a personas jurídicas.",
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
-        "Los datos estadísticos pueden estar exentos sólo si están efectivamente disociados de la identidad; si pueden relacionarse con un individuo, aplican las protecciones."
+        "El RGPD solo protege datos de personas físicas. Las personas jurídicas se rigen por otros regímenes de confidencialidad."
     },
     {
       question:
-        "11. El consentimiento para el tratamiento de datos personales puede ser tácito si el usuario no se opone explícitamente.",
-      options: ["Verdadero", "Falso"],
-      answer: "Falso",
-      justification:
-        "La Ley 25.326 exige que el consentimiento sea libre, expreso e informado; no admite consentimiento tácito."
-    },
-    {
-      question:
-        "12. La identidad digital se construye a partir de la huella digital y la reputación digital, según la clase de Protección de Datos Personales.",
+        "9. En Argentina, la Ley 25.326 (Protección de Datos Personales) fue sancionada en el año 2000 y es pionera en la región.",
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "La identidad digital abarca la huella digital (rastros que dejamos) y la reputación (información compartida voluntariamente)."
+        "La Ley 25.326 de 2000 fue una de las primeras en Latinoamérica en crear un marco fuerte de protección de datos."
     },
     {
       question:
-        "13. El Delegado de Protección de Datos (DPO) es obligatorio en Argentina para todas las empresas, sin importar su tamaño.",
-      options: ["Verdadero", "Falso"],
-      answer: "Falso",
-      justification:
-        "En Argentina, el DPO es obligatorio para organismos públicos y para tratamientos masivos de datos sensibles, no para toda empresa sin distinción."
-    },
-    {
-      question:
-        "14. La evaluación de impacto en la protección de datos es un proceso previo al tratamiento para detectar riesgos, y es obligatoria en ciertos casos.",
+        "10. Según la Ley 25.326, los datos estadísticos disociados de identidad están exentos del régimen de protección.",
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "Cuando el tratamiento implica alto riesgo a derechos de los titulares, el responsable debe realizar evaluación de impacto según la normativa."
+        "La ley excluye de su aplicación a bases de datos con fines estadísticos siempre que los datos estén disociados de la identidad."
     },
     {
       question:
-        "15. La protección de datos en Argentina se extiende a datos de “personas de existencia ideal” (personas jurídicas).",
+        "11. El consentimiento para el tratamiento de datos personales puede ser tácito si el usuario no se opone.",
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
-        "La Ley 25.326 protege datos de personas humanas (físicas), no de personas jurídicas; las empresas se rigen por otros derechos."
+        "La Ley 25.326 exige que el consentimiento sea libre, expreso e informado: no admite consentimiento tácito."
     },
     {
       question:
-        "16. La “privacidad por diseño” implica integrar la protección de datos desde la planificación de sistemas, no como un parche posterior.",
+        "12. La identidad digital se construye con la huella digital y la reputación digital, según la clase de Datos Personales.",
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "Privacidad por diseño exige incorporar la protección de datos desde la concepción, no después."
+        "La identidad digital abarca la huella digital (rastros en línea) y la reputación digital (información compartida voluntariamente)."
     },
     {
       question:
-        "17. El uso de cookies para rastrear hábitos de navegación en territorio argentino está sujeto a la aplicación extraterritorial de la Ley 25.326.",
-      options: ["Verdadero", "Falso"],
-      answer: "Verdadero",
-      justification:
-        "La ley se aplica a responsables fuera de Argentina que ofrezcan servicios o monitoreen comportamientos de usuarios argentinos, lo cual incluye cookies."
-    },
-    {
-      question:
-        "18. La globalización actual depende exclusivamente de factores económicos y no involucra tecnología ni cultura.",
+        "13. El Delegado de Protección de Datos (DPO) es obligatorio para todas las empresas argentinas, sin importar tamaño.",
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
-        "La globalización actual es multidimensional: abarca economía, política, tecnología, cultura y comunicación."
+        "El DPO es obligatorio en organismos públicos y en tratamientos de datos masivos o sensibles, no en toda empresa automáticamente."
     },
     {
       question:
-        "19. El “Galeón de Manila” fue un ejemplo de Primera Globalización que conectó Asia, América y Europa desde el siglo XVI.",
+        "14. La evaluación de impacto en protección de datos es obligatoria siempre que exista alto riesgo a derechos fundamentales.",
       options: ["Verdadero", "Falso"],
       answer: "Verdadero",
       justification:
-        "El Galeón de Manila unía Manila (Filipinas) con Acapulco (Nueva España), conectando Asia, América y, a través de Europa, desde el siglo XVI."
+        "Cuando un tratamiento de datos implica alto riesgo (sensibilidad, volumen, contexto), se requiere la evaluación de impacto."
     },
     {
       question:
-        "20. La crisis mexicana 1994/1995 (efecto Tequila) no tuvo impacto global porque solo afectó al mercado interno de México.",
+        "15. La Ley 25.326 protege datos de personas humanas y de personas jurídicas por igual.",
       options: ["Verdadero", "Falso"],
       answer: "Falso",
       justification:
-        "El “efecto Tequila” se propagó a otros mercados emergentes y afectó flujos de capital en la región; tuvo impacto global."
+        "La Ley protege únicamente datos de personas físicas; las personas jurídicas tienen protección por confidencialidad comercial."
+    },
+    {
+      question:
+        "16. “Privacidad por diseño” significa incorporar protección de datos desde la fase conceptual de un sistema.",
+      options: ["Verdadero", "Falso"],
+      answer: "Verdadero",
+      justification:
+        "Privacidad por diseño implica integrar la protección desde el inicio, no agregarla como parche al final."
+    },
+    {
+      question:
+        "17. El uso de cookies para rastrear usuarios en Argentina queda fuera de la aplicación extraterritorial de la Ley 25.326.",
+      options: ["Verdadero", "Falso"],
+      answer: "Falso",
+      justification:
+        "La ley aplica a responsables fuera de Argentina que monitorean comportamientos de usuarios argentinos, lo que incluye cookies."
+    },
+    {
+      question:
+        "18. La globalización actual depende únicamente de factores económicos y excluye tecnología y cultura.",
+      options: ["Verdadero", "Falso"],
+      answer: "Falso",
+      justification:
+        "La globalización actual es multidimensional: incluye economía, política, tecnología, cultura y comunicación."
+    },
+    {
+      question:
+        "19. El “Galeón de Manila” conectó Asia, América y Europa durante la Primera Globalización.",
+      options: ["Verdadero", "Falso"],
+      answer: "Verdadero",
+      justification:
+        "El Galeón de Manila unía Manila (Filipinas) con Acapulco (Nueva España), conectando Asia, América y Europa."
+    },
+    {
+      question:
+        "20. La crisis mexicana 1994/95 (efecto Tequila) no tuvo impacto global porque solo afectó al mercado interno.",
+      options: ["Verdadero", "Falso"],
+      answer: "Falso",
+      justification:
+        "El “efecto Tequila” se propagó a otros mercados emergentes y afectó flujos de capital en América Latina."
     }
   ],
 
@@ -180,7 +180,7 @@ const sections = {
       ],
       answer: "Fue impulsada principalmente por la Revolución Industrial",
       justification:
-        "La Primera Globalización se impulsó por el descubrimiento de América y la expansión española, no por la Revolución Industrial (esa corresponde a la Segunda Globalización)."
+        "La Primera Globalización se impulsó por el descubrimiento de América y la expansión española, no por la Revolución Industrial (esa corresponde a la Segunda)."
     },
     {
       question:
@@ -208,7 +208,7 @@ const sections = {
       ],
       answer: "Sincroniza automáticamente políticas fiscales de todos los países",
       justification:
-        "La globalización económica no sincroniza políticas fiscales: cada país mantiene sus decisiones fiscales, aunque se influencian mutuamente."
+        "La globalización económica no sincroniza políticas fiscales: cada país mantiene sus decisiones fiscales."
     },
     {
       question:
@@ -222,7 +222,7 @@ const sections = {
       ],
       answer: "Establece que todos los países adoptan la misma constitución",
       justification:
-        "La globalización política no obliga a países a tener una misma constitución; su relevancia está en la creación de redes multilaterales y ONG internacionales."
+        "La globalización política no obliga a países a tener una misma constitución; promueve redes multilaterales y ONG."
     },
     {
       question:
@@ -236,13 +236,13 @@ const sections = {
       ],
       answer: "Imperio Español como actor dominante",
       justification:
-        "El Imperio Español fue protagonista de la Primera Globalización, no de la Segunda (que comienza con la posguerra fría y la revolución informática)."
+        "El Imperio Español fue protagonista de la Primera Globalización, no de la Segunda (que inicia con la posguerra fría)."
     },
     {
       question:
         "6. Sobre la Ley 25.326 de Argentina, ¿cuál de las afirmaciones es INCORRECTA?",
       options: [
-        "Protege datos alojados en archivos públicos y privados",
+        "Protege datos en archivos públicos y privados",
         "Excluye datos de uso interno, personal o doméstico",
         "Aplica únicamente a datos biométricos",
         "Garantiza el derecho al honor y la intimidad",
@@ -250,11 +250,11 @@ const sections = {
       ],
       answer: "Aplica únicamente a datos biométricos",
       justification:
-        "La Ley 25.326 protege toda clase de datos personales, no sólo los biométricos; los datos biométricos se consideran sensibles con exigencias adicionales."
+        "La Ley 25.326 protege toda clase de datos personales, no solo los biométricos; los datos sensibles requieren mayor cuidado."
     },
     {
       question:
-        "7. ¿Cuál de los siguientes NO es un derecho reconocido para el titular de datos en la Ley 25.326?",
+        "7. ¿Cuál de los siguientes NO es un derecho de los titulares en la Ley 25.326?",
       options: [
         "Derecho de acceso",
         "Derecho de portabilidad",
@@ -264,89 +264,89 @@ const sections = {
       ],
       answer: "Derecho de portabilidad",
       justification:
-        "El derecho de portabilidad se incorporó con la propuesta de modificación actual, no existía en la Ley 25.326 original (aparece en el RGPD)."
+        "El derecho de portabilidad se incorporó en la propuesta de modificación actual, no estaba en la Ley original (aparece en el RGPD)."
     },
     {
       question:
-        "8. En la protección de datos, ¿qué afirmación es FALSA con respecto al DPO (Delegado de Protección de Datos)?",
+        "8. En protección de datos, ¿qué afirmación es FALSA respecto al DPO?",
       options: [
         "Es obligatorio en organismos públicos",
-        "Debe ser una persona independiente al responsable del tratamiento",
+        "Debe ser independiente al responsable del tratamiento",
         "Solo es necesario en tratamientos de gran volumen",
         "Nunca puede ser un empleado de la organización",
         "Supervisa el cumplimiento normativo"
       ],
       answer: "Nunca puede ser un empleado de la organización",
       justification:
-        "El DPO puede ser un empleado interno o un consultor externo, siempre y cuando actúe con independencia y sin conflicto de intereses."
+        "El DPO puede ser interno o externo, siempre que actúe con independencia y sin conflicto de intereses."
     },
     {
       question:
-        "9. ¿Cuál elemento NO forma parte de las “privacidad por diseño”?",
+        "9. ¿Cuál elemento NO forma parte de “privacidad por diseño”?",
       options: [
-        "Incluir la protección de datos en la fase conceptual",
-        "Tratar sólo los datos estrictamente necesarios",
-        "Agregar la privacidad como parche al final del desarrollo",
-        "Documentar las medidas de seguridad desde el inicio",
-        "Integrar controles de acceso desde etapas tempranas"
+        "Incluir la protección desde la fase conceptual",
+        "Tratar solo datos estrictamente necesarios",
+        "Añadirla como parche al final del desarrollo",
+        "Documentar medidas de seguridad desde el inicio",
+        "Integrar controles de acceso temprano"
       ],
-      answer: "Agregar la privacidad como parche al final del desarrollo",
+      answer: "Añadirla como parche al final del desarrollo",
       justification:
-        "La privacidad por diseño exige incorporar la protección de datos desde la concepción, no como un parche posterior."
+        "Privacidad por diseño exige integrar la protección desde la concepción, no al final."
     },
     {
       question:
-        "10. Respecto a la identidad digital, señale la opción incorrecta:",
+        "10. Respecto a la identidad digital, ¿qué es incorrecto?",
       options: [
-        "La “huella digital” se refiere al rastro que dejan nuestras interacciones en la red",
-        "La “reputación digital” es lo que compartimos voluntariamente",
-        "Sólo incluye datos de redes sociales",
-        "Forma parte de nuestra identidad social en internet",
-        "Puede incluir datos recopilados por empresas de servicios digitales"
+        "La huella digital es el rastro de datos en línea",
+        "La reputación digital es la información que compartimos",
+        "Solo incluye datos de redes sociales",
+        "Forma parte de nuestra identidad en internet",
+        "Incluye datos recopilados por empresas digitales"
       ],
-      answer: "Sólo incluye datos de redes sociales",
+      answer: "Solo incluye datos de redes sociales",
       justification:
-        "La identidad digital abarca huella y reputación, incluidos datos de búsquedas, cookies y transacciones online, no sólo redes sociales."
+        "La identidad digital abarca huella y reputación, incluidos datos de cookies, transacciones y búsquedas, no solo redes sociales."
     },
     {
       question:
-        "11. Sobre la aplicación extraterritorial de la Ley 25.326, ¿cuál enunciado es INCORRECTO?",
+        "11. Sobre la aplicación extraterritorial de la Ley 25.326, ¿qué es INCORRECTO?",
       options: [
-        "Aplica a responsables fuera de Argentina que ofrecen bienes o servicios a residentes argentinos",
-        "Incluye a entidades que monitorean el comportamiento de usuarios en territorio argentino",
-        "No aplica en absoluto a empresas sin presencia física en Argentina",
-        "Obliga a empresas internacionales a cumplir con la ley",
-        "Se relaciona con el uso de cookies y geolocalización"
+        "Aplica a responsables fuera de Argentina que ofrecen servicios a argentinos",
+        "Incluye entidades que monitorean comportamientos de usuarios en Argentina",
+        "No aplica a empresas sin presencia física en Argentina",
+        "Obliga a empresas internacionales a cumplir la ley",
+        "Se relaciona con cookies y geolocalización"
       ],
-      answer: "No aplica en absoluto a empresas sin presencia física en Argentina",
+      answer: "No aplica a empresas sin presencia física en Argentina",
       justification:
-        "La ley sí aplica a entidades sin presencia física que ofrecen servicios o monitorean comportamientos de usuarios argentinos."
+        "La ley sí aplica a entidades sin presencia física que ofrecen servicios o monitorean a usuarios argentinos."
     },
     {
       question:
-        "12. ¿Cuál de los siguientes NO es un antecedente histórico mencionado para la globalización?",
+        "12. ¿Cuál de estos NO es antecedente histórico de la globalización?",
       options: [
-        "La conquista y colonización de América por España en 1492",
-        "La primera transmisión mundial vía satélite en 1969",
-        "La autodisolución de la URSS en 1991",
-        "La invención del código Morse en 1837",
-        "La explosión de la bomba atómica en 1945"
+        "Conquista de América (1492)",
+        "Primera transmisión mundial vía satélite (1969)",
+        "Autodisolución de la URSS (1991)",
+        "Invención del código Morse (1837)",
+        "Explosión de la bomba atómica (1945)"
       ],
-      answer: "La invención del código Morse en 1837",
+      answer: "Invención del código Morse (1837)",
       justification:
-        "Si bien el código Morse mejoró comunicaciones, no se menciona como antecedente directo de globalización; sí lo son la colonización de América, la bomba atómica e hitos telemáticos como satélites."
+        "El código Morse mejoró comunicaciones, pero no se menciona como antecedente directo de globalización; los otros sí aparecen."
     },
     {
       question:
-        "13. En términos de ONG y filantropía global, ¿cuál afirmación es ERRÓNEA?",
+        "13. En ONG y filantropía global, ¿qué es ERRÓNEO?",
       options: [
-        "ONG influyen en políticas públicas más allá de fronteras nacionales",
-        "Flujos filantrópicos privados hacia países en desarrollo superaron los 59.000 millones USD en 2010",
-        "Las organizaciones filantrópicas no pueden operar fuera de su país de origen",
+        "ONG influyen en políticas públicas transnacionales",
+        "Flujos filantrópicos superaron 59.000 M USD en 2010",
+        "Las filantrópicas no pueden operar fuera de su país",
         "El Instituto Hudson estimó esos flujos en 2010",
-        "La ayuda humanitaria es un aspecto de la globalización económica y social"
+        "La ayuda humanitaria es parte de la globalización"
       ],
-      answer: "Las organizaciones filantrópicas no pueden operar fuera de su país de origen",
+      answer: "Las filantrópicas no pueden operar fuera de su país",
       justification:
         "Muchas ONG y fundaciones filantrópicas operan internacionalmente; no están limitadas a su país de origen."
     },
@@ -362,67 +362,61 @@ const sections = {
       ],
       answer: "Ejecución automática de decisiones",
       justification:
-        "La Ley 25.326 no contempla la ejecución automática de decisiones como principio; ese concepto se relaciona con derechos digitales (revisión humana)."
+        "La Ley 25.326 no contempla la ejecución automática de decisiones como principio; ese concepto se asocia a derechos digitales."
     },
     {
       question:
-        "15. ¿Qué aspecto no está contemplado en la definición de globalización cultural?",
+        "15. ¿Qué aspecto no está en la globalización cultural?",
       options: [
-        "Transmisión de ideas y valores globales",
-        "Consumo común de culturas por internet",
-        "Exclusiva exportación de productos agrícolas",
+        "Transmisión de ideas y valores",
+        "Consumo común de cultura por internet",
+        "Exportación exclusiva de productos agrícolas",
         "Intercambio de medios culturales populares",
         "Formación de normas y conocimientos compartidos"
       ],
-      answer: "Exclusiva exportación de productos agrícolas",
+      answer: "Exportación exclusiva de productos agrícolas",
       justification:
-        "La globalización cultural va más allá de productos, engloba ideas, valores, medios y normas. La exportación de productos agrícolas es un aspecto económico, no estrictamente cultural."
+        "La globalización cultural va más allá de productos, incluye ideas, valores, medios y normas."
     },
     {
       question:
         "16. Sobre las crisis económicas globales, identifique la afirmación incorrecta:",
       options: [
-        "La crisis mexicana de 1994/95 se llamó “efecto Tequila”",
-        "La crisis asiática de 1997/98 se llamó “efecto Dragón”",
-        "La crisis rusa de 1998 fue “efecto Vodka”",
+        "La crisis mexicana 1994/95 fue “efecto Tequila”",
+        "La crisis asiática 1997/98 fue “efecto Dragón”",
+        "La crisis rusa 1998 fue “efecto Vodka”",
         "La crisis de 2008 no impactó economías emergentes",
-        "La crisis argentina de 2001/02 fue “efecto Tango”"
+        "La crisis argentina 2001/02 fue “efecto Tango”"
       ],
       answer: "La crisis de 2008 no impactó economías emergentes",
       justification:
-        "La crisis de 2008 sí impactó economías emergentes; no se limitó a mercados desarrollados."
+        "La crisis de 2008 sí afectó economías emergentes; no se limitó a mercados desarrollados."
     },
     {
       question:
-        "17. ¿Cuál opción no corresponde a una dimensión de la globalización?",
-      options: [
-        "Económica",
-        "Política",
-        "Cultural",
-        "Galáctica",
-        "Tecnológica"
-      ],
+        "17. ¿Cuál de estas NO es dimensión de la globalización?",
+      options: ["Económica", "Política", "Cultural", "Galáctica", "Tecnológica"],
       answer: "Galáctica",
       justification:
-        "No existe la “globalización galáctica” como dimensión; las tres más estudiadas son económica, política y cultural (además de la tecnológica)."
+        "No existe la “globalización galáctica”; las principales dimensiones son económica, política y cultural (y tecnológica)."
     },
     {
       question:
-        "18. Respecto al uso de grandes volúmenes de datos (Big Data) en globalización, ¿cuál es FALSA?",
+        "18. Respecto a Big Data en globalización, ¿cuál es FALSA?",
       options: [
-        "Impulsa la inteligencia artificial",
-        "Permite decisiones basadas en datos en tiempo real",
-        "No tiene ningún riesgo para la privacidad",
-        "Aumenta la eficiencia productiva",
-        "Genera valor en cadenas de suministro internacionales"
+        "Impulsa la IA",
+        "Permite decisiones en tiempo real",
+        "No presenta riesgos de privacidad",
+        "Aumenta eficiencia productiva",
+        "Genera valor en cadenas internacionales"
       ],
-      answer: "No tiene ningún riesgo para la privacidad",
+      answer: "No presenta riesgos de privacidad",
       justification:
-        "El Big Data aumenta riesgos de privacidad y seguridad; no es libre de riesgos."
+        "Big Data sí implica riesgos de privacidad y seguridad; no está exento de ellos."
     },
     {
       question:
-        "19. ¿Qué elemento NO forma parte de las “recomendaciones UNESCO sobre IA y ética”?",
+        "19. ¿Qué NO forma parte de las “recomendaciones UNESCO sobre IA y ética”?",
       options: [
         "Principio de transparencia",
         "Respeto a la autonomía humana",
@@ -432,33 +426,33 @@ const sections = {
       ],
       answer: "Promoción de sesgos algorítmicos",
       justification:
-        "La UNESCO busca eliminar sesgos algorítmicos, no promoverlos; los demás puntos sí forman parte de recomendaciones éticas."
+        "La UNESCO busca eliminar sesgos algorítmicos, no promoverlos; los demás puntos sí forman parte de sus recomendaciones."
     },
     {
       question:
-        "20. ¿Cuál afirmación es correcta sobre la regulación de datos en Argentina y el RGPD?",
+        "20. ¿Cuál afirmación es correcta sobre regulación de datos en Argentina y el RGPD?",
       options: [
-        "La Ley 25.326 se alinea completamente con el RGPD europeo",
+        "La Ley 25.326 se alinea completamente con el RGPD",
         "El RGPD protege datos de personas jurídicas, a diferencia de Argentina",
-        "La legislación argentina no contempla datos biométricos como sensibles",
-        "El proyecto de nueva ley introduce portabilidad y revisión humana",
-        "La Ley 25.326 sólo aplica a bases de datos públicos"
+        "La ley argentina no considera datos biométricos como sensibles",
+        "El proyecto de modificación introduce portabilidad y revisión humana",
+        "La Ley 25.326 solo aplica a bases públicas"
       ],
-      answer: "El proyecto de nueva ley introduce portabilidad y revisión humana",
+      answer: "El proyecto de modificación introduce portabilidad y revisión humana",
       justification:
-        "El proyecto de modificación actual incorpora derechos digitales como portabilidad y revisión humana; la Ley 25.326 original no los incluía."
+        "El proyecto actual incorpora derechos digitales como portabilidad y revisión humana; la Ley original no los tenía."
     }
   ],
 
   "Preguntas Comunes": [
     {
       question:
-        "1. ¿Cuál es la definición de globalización según el Diccionario de la Lengua Española de la Real Academia?",
+        "1. ¿Cuál es la definición de globalización según el Diccionario de la Real Academia?",
       options: [
         "Tendencia de los mercados y empresas a alcanzar dimensión mundial",
         "Proceso exclusivo de expansión militar",
         "Fusión de todos los países en uno solo",
-        "Sistema de intercambio de sólo bienes agrícolas",
+        "Sistema de intercambio de solo bienes agrícolas",
         "Restricción de fronteras nacionales"
       ],
       answer: "Tendencia de los mercados y empresas a alcanzar dimensión mundial",
@@ -481,7 +475,7 @@ const sections = {
     },
     {
       question:
-        "3. ¿Cuál de estos NO es un antecedente histórico de la globalización según el material?",
+        "3. ¿Cuál de estos NO es antecedente histórico de la globalización según el material?",
       options: [
         "Descubrimiento de América en 1492",
         "Llegada del hombre a la Luna en 1969",
@@ -491,21 +485,21 @@ const sections = {
       ],
       answer: "Invención de la imprenta en el siglo XV",
       justification:
-        "Aunque la imprenta es relevante para comunicaciones, el material no la menciona explícitamente como antecedente de la globalización moderna."
+        "Aunque la imprenta es relevante histórico, el PDF no la menciona como antecedente directo de la globalización moderna."
     },
     {
       question:
         "4. ¿Qué es la globalización cultural según el PDF analizado?",
       options: [
         "La transmisión de ideas, significados y valores a escala mundial",
-        "El intercambio exclusivo de productos agrícolas",
-        "La uniformidad total de culturas sin diferencias",
-        "El fin de todas las tradiciones locales",
-        "La desaparición de internet"
+        "Intercambio exclusivo de productos agrícolas",
+        "Uniformidad total de culturas sin diferencias",
+        "Fin de todas las tradiciones locales",
+        "Desaparición de internet"
       ],
       answer: "La transmisión de ideas, significados y valores a escala mundial",
       justification:
-        "La globalización cultural implica intercambio y difusión de ideas, valores y hábitos, no la desaparición total de culturas locales."
+        "La globalización cultural implica intercambio y difusión de ideas, valores y significados, no la desaparición total de culturas."
     },
     {
       question:
@@ -515,11 +509,11 @@ const sections = {
         "Consentimiento tácito",
         "Obligatoriedad de compartir datos con terceros",
         "Prohibición del derecho de rectificación",
-        "Acceso a datos sólo mediante pago"
+        "Acceso a datos solo mediante pago"
       ],
       answer: "Consentimiento libre, expreso e informado",
       justification:
-        "La ley exige que el titular otorgue un consentimiento libre, expreso e informado; no existe consentimiento tácito."
+        "La ley exige que el titular otorgue consentimiento libre, expreso e informado; no admite consentimiento tácito."
     },
     {
       question:
@@ -547,11 +541,11 @@ const sections = {
       ],
       answer: "Datos personales de uso interno, personal o doméstico",
       justification:
-        "La ley no se aplica a datos utilizados de manera exclusivamente interna, personal o doméstica; los demás quedan incluidos si son registrados."
+        "La ley no se aplica a datos utilizados solo de manera interna, personal o doméstica; los demás quedan incluidos."
     },
     {
       question:
-        "8. ¿Qué dato se considera “sensible” según la clase de Protección de Datos Personales?",
+        "8. ¿Qué dato se considera “sensible” según la clase de Protección de Datos?",
       options: [
         "Información sobre salud o genética",
         "Nombre y apellido",
@@ -561,7 +555,7 @@ const sections = {
       ],
       answer: "Información sobre salud o genética",
       justification:
-        "Datos sensibles incluyen información genética, biométrica o que revele aspectos de salud; datos como color favorito no lo son."
+        "Los datos sensibles incluyen información genética, biométrica o que revele aspectos de salud; los demás no."
     },
     {
       question:
@@ -575,7 +569,7 @@ const sections = {
       ],
       answer: "Rastro de datos que registran empresas de servicios digitales",
       justification:
-        "La huella digital es el rastro que dejamos cuando navegamos/interactuamos con servicios en línea; no es nuestra reputación voluntaria."
+        "La huella digital es el rastro que dejamos en línea al interactuar con servicios digitales; no es solo reputación."
     },
     {
       question:
@@ -583,55 +577,55 @@ const sections = {
       options: [
         "Portabilidad de datos",
         "Recibir publicidad no deseada",
-        "Eliminar datos de forma irrestricta sin justificación",
+        "Eliminar datos sin justificación",
         "Transferencia automática a bases internacionales",
         "Captura biométrica obligatoria"
       ],
       answer: "Portabilidad de datos",
       justification:
-        "El proyecto introduce el derecho a la portabilidad, permitiendo al titular solicitar datos en formato estructurado para transferirlos a otro responsable."
+        "El proyecto incorpora el derecho a la portabilidad: permite al titular solicitar datos en formato legible por máquina."
     },
     {
       question:
-        "11. ¿Cuál es el significado de “privacidad por defecto”?",
+        "11. ¿Qué significa “privacidad por defecto”?",
       options: [
-        "Solo se tratan los datos estrictamente necesarios y con la máxima protección desde el inicio",
-        "Se habilitan todos los datos sin permiso del usuario",
+        "Solo se tratan datos estrictamente necesarios y con máxima protección por defecto",
+        "Se habilitan todos los datos sin permiso",
         "Se descartan todos los datos sin excepción",
-        "El usuario debe buscar cómo proteger sus datos",
-        "La privacidad se ajusta sólo en la última etapa"
+        "El usuario debe configurar su privacidad manualmente",
+        "La privacidad se ajusta al final del desarrollo"
       ],
-      answer: "Solo se tratan los datos estrictamente necesarios y con la máxima protección desde el inicio",
+      answer: "Solo se tratan datos estrictamente necesarios y con máxima protección por defecto",
       justification:
-        "Privacidad por defecto exige que, por defecto, los sistemas sólo recojan datos necesarios y los protejan al máximo sin que el usuario configure nada."
+        "Privacidad por defecto exige que, por defecto, el nivel de protección sea alto y solo se recojan datos mínimos."
     },
     {
       question:
         "12. ¿Cuál es la diferencia clave entre la Primera y la Segunda Globalización?",
       options: [
         "La Primera fue colonial y marítima; la Segunda, tecnológica e informática",
-        "La Primera fue exclusivamente económica; la Segunda sólo cultural",
-        "La Primera ocurrió en el siglo XX; la Segunda en el siglo XV",
-        "La Primera utilizó sólo camiones; la Segunda sólo barcos",
-        "No hay diferencia, son exactamente iguales"
+        "La Primera fue económica; la Segunda, cultural",
+        "La Primera sucedió en el siglo XX; la Segunda en el siglo XV",
+        "La Primera usó solo camiones; la Segunda, solo barcos",
+        "No hay diferencia, son iguales"
       ],
       answer: "La Primera fue colonial y marítima; la Segunda, tecnológica e informática",
       justification:
-        "La Primera Globalización se caracteriza por el Imperio Español y rutas marítimas (siglos XV–XIX). La Segunda es posguerra fría, impulsada por TIC y liberalización."
+        "La Primera Globalización (siglos XV–XIX) se basó en imperios y rutas marítimas; la Segunda (pos Guerra Fría) se apoya en TIC."
     },
     {
       question:
-        "13. ¿Qué evento marcó simbólicamente el inicio de la globalización contemporánea para muchos autores?",
+        "13. ¿Qué evento marcó simbólicamente el inicio de la globalización contemporánea?",
       options: [
         "La caída del Muro de Berlín en 1989",
         "La invención de la rueda",
-        "La independencia de Estados Unidos",
+        "La independencia de EE.UU.",
         "La publicación de “La Ilíada”",
         "El primer vuelo de los hermanos Wright"
       ],
       answer: "La caída del Muro de Berlín en 1989",
       justification:
-        "Muchos simbolizan la globalización contemporánea con la caída del Muro de Berlín, fin de la Guerra Fría y apertura de economías."
+        "Muchos simbolizan la globalización contemporánea con la caída del Muro, fin de la Guerra Fría y apertura de mercados."
     },
     {
       question:
@@ -640,16 +634,16 @@ const sections = {
         "Galeón de Manila",
         "Titanic",
         "Galileo",
-        "Transatlántico Queen Mary",
-        "Viking Longship"
+        "Queen Mary",
+        "Barco vikingo"
       ],
       answer: "Galeón de Manila",
       justification:
-        "El Galeón de Manila unía Manila (Filipinas) con Acapulco (Nueva España), conectando Asia, América y Europa desde el siglo XVI."
+        "El Galeón de Manila unía Manila (Filipinas) con Acapulco (Nueva España) desde el siglo XVI, conectando tres continentes."
     },
     {
       question:
-        "15. ¿Cuál institución surgió en 1995 y se considera fundamental para la globalización económica?",
+        "15. ¿Qué institución surgió en 1995 y es clave para la globalización económica?",
       options: [
         "Organización Mundial del Comercio (OMC)",
         "Unión Europea",
@@ -659,25 +653,25 @@ const sections = {
       ],
       answer: "Organización Mundial del Comercio (OMC)",
       justification:
-        "La OMC se creó en 1995, regulando el comercio internacional y promoviendo la liberalización económica global."
+        "La OMC se creó en 1995 para regular el comercio internacional y fomentar la liberalización económica global."
     },
     {
       question:
-        "16. ¿Cuál de estas afirmaciones sobre la Agencia de Acceso a la Información Pública (AAIP) es CORRECTA?",
+        "16. ¿Cuál afirmación sobre la AAIP es CORRECTA?",
       options: [
         "Es la autoridad de aplicación de la Ley 25.326 en Argentina",
-        "Se ocupa únicamente de estadísticas",
-        "Es una dependencia del Banco Central",
-        "Se funda en 2015 en Brasil",
-        "Fue creada por la UNESCO"
+        "Solo maneja estadísticas",
+        "Depende del Banco Central",
+        "Se fundó en 2015 en Brasil",
+        "La creó la UNESCO"
       ],
       answer: "Es la autoridad de aplicación de la Ley 25.326 en Argentina",
       justification:
-        "La AAIP, a través de su Dirección Nacional de Protección de Datos Personales, controla el cumplimiento de la Ley 25.326."
+        "La AAIP, a través de su Dirección Nacional de Protección de Datos Personales, gestiona la aplicación de la ley en Argentina."
     },
     {
       question:
-        "17. ¿Cuál de estas NO es una organización internacional que influye en la gobernanza global?",
+        "17. ¿Cuál NO es una organización que influye en la gobernanza global?",
       options: [
         "Fundación de Apoyo a la Monarquía Andina",
         "ONG internacionales",
@@ -687,25 +681,25 @@ const sections = {
       ],
       answer: "Fundación de Apoyo a la Monarquía Andina",
       justification:
-        "La “Fundación de Apoyo a la Monarquía Andina” es ficticia; las demás existen como actores en la gobernanza global."
+        "La “Fundación de Apoyo a la Monarquía Andina” es ficticia; las demás existen como actores en gobernanza global."
     },
     {
       question:
-        "18. ¿Qué significa la “autodisolución de la URSS” en 1991 para la globalización?",
+        "18. ¿Qué implica la “autodisolución de la URSS” en 1991 para la globalización?",
       options: [
-        "El fin simbólico de la Guerra Fría y apertura de nuevos mercados",
-        "La formación del Imperio Ruso",
-        "El inicio de la Primera Guerra Mundial",
-        "La conquista de la Luna",
-        "El triunfo del comunismo mundial"
+        "Fin simbólico de la Guerra Fría y apertura de nuevos mercados",
+        "Formación del Imperio Ruso",
+        "Inicio de la Primera Guerra Mundial",
+        "Conquista de la Luna",
+        "Triunfo del comunismo mundial"
       ],
-      answer: "El fin simbólico de la Guerra Fría y apertura de nuevos mercados",
+      answer: "Fin simbólico de la Guerra Fría y apertura de nuevos mercados",
       justification:
-        "La disolución de la URSS marcó el fin del bloque comunista, generando mayor liberalización económica y cultural."
+        "La disolución de la URSS marcó el fin del bloque comunista, facilitando mayor liberalización económica y cultural."
     },
     {
       question:
-        "19. ¿Cuál de estos NO es un efecto económico asociado a la globalización?",
+        "19. ¿Cuál NO es un efecto económico asociado a la globalización?",
       options: [
         "Reducción de barreras arancelarias",
         "Aumento de desigualdad en ciertos sectores",
@@ -715,7 +709,7 @@ const sections = {
       ],
       answer: "Aislamiento total de economías nacionales",
       justification:
-        "La globalización busca integración, no aislamiento; las demás opciones son efectos reales de la globalización económica."
+        "La globalización busca integración, no aislamiento; las demás son efectos reales de la globalización económica."
     },
     {
       question:
@@ -723,35 +717,32 @@ const sections = {
       options: [
         "Interacción entre autoridades nacionales e internacionales",
         "Múltiples niveles de autoridad que cooperan",
-        "Sólo existe un único nivel de gobierno centralizado",
-        "Promueve la colaboración entre distintos niveles",
-        "Es parte del estudio de la globalización política"
+        "Solo existe un único nivel de gobierno centralizado",
+        "Promueve colaboración entre distintos niveles",
+        "Es parte de la globalización política"
       ],
-      answer: "Sólo existe un único nivel de gobierno centralizado",
+      answer: "Solo existe un único nivel de gobierno centralizado",
       justification:
-        "La gobernanza multinivel implica múltiples niveles de autoridad; la afirmación de un único nivel es incorrecta."
+        "La gobernanza multinivel implica múltiples niveles de autoridad trabajando juntos; el enunciado de un nivel único es incorrecto."
     }
   ]
 };
 
 export default function QuizGIC() {
-  // 1) Estado inicial de 'section' VACÍO:
-  const [section, setSection] = useState("");
-  const [current, setCurrent] = useState(0);
-  const [score, setScore] = useState(0);
-  const [answers, setAnswers] = useState([]);
-  // trackea cuál opción eligió el usuario en la pregunta actual
-  const [selectedOption, setSelectedOption] = useState("");
-  // al responder, mostramos feedback; hasta que no haga clic en “Siguiente” no avanzamos
-  const [showFeedback, setShowFeedback] = useState(false);
+  const [section, setSection] = useState(""); // “Verdadero o Falso”, “Preguntas Trampa” o “Preguntas Comunes”
+  const [current, setCurrent] = useState(0); // Índice de la pregunta actual
+  const [score, setScore] = useState(0); // Puntaje acumulado
+  const [answers, setAnswers] = useState([]); // Para resultado final
+  const [selectedOption, setSelectedOption] = useState(""); // Opción elegida
+  const [showFeedback, setShowFeedback] = useState(false); // Para mostrar colores y justificación
 
-  // Si section === "" entonces questions = []
+  // Si no hay sección seleccionada, questions = []
   const questions = section ? sections[section] : [];
   const currentQuestion = questions[current];
 
   // Cuando el usuario elige una opción
   const handleAnswer = (opt) => {
-    if (showFeedback) return; // si ya estamos mostrando feedback, bloqueamos clicks adicionales
+    if (showFeedback) return; // bloquea doble-clic
     setSelectedOption(opt);
     setShowFeedback(true);
 
@@ -760,7 +751,7 @@ export default function QuizGIC() {
       setScore((s) => s + 1);
     }
 
-    // Almacenamos la respuesta en el array
+    // Guardamos el registro para la pantalla de resultados finales
     setAnswers((arr) => [
       ...arr,
       {
@@ -772,21 +763,20 @@ export default function QuizGIC() {
     ]);
   };
 
-  // Cuando el usuario hace clic en “Siguiente”
+  // Al pulsar “Continuar” → avanzar a la siguiente pregunta
   const handleNext = () => {
     setShowFeedback(false);
     setSelectedOption("");
 
-    // Si no es la última pregunta, avanzamos
     if (current + 1 < questions.length) {
       setCurrent((c) => c + 1);
     } else {
-      // Si era la última, marcamos current = questions.length para mostrar el resultado final
+      // Pasar al “Resultado Final”
       setCurrent((c) => c + 1);
     }
   };
 
-  // Resetear todo y volver al menú
+  // Reset completo
   const resetQuiz = () => {
     setSection("");
     setCurrent(0);
@@ -799,159 +789,221 @@ export default function QuizGIC() {
   return (
     <main className="min-h-screen bg-black text-gray-100 p-6 font-sans">
       <div className="max-w-3xl mx-auto bg-[#111] p-6 rounded-2xl shadow-2xl">
-        <h1 className="text-4xl font-bold text-center text-gray-100 mb-4">Quiz GIC</h1>
+        {/* ──────────────────────────────────────────────────── */}
+        {/* ENCABEZADO PRINCIPAL */}
+        <h1 className="text-3xl font-semibold text-center text-gray-100 mb-6">
+          Quiz GIC
+        </h1>
 
-        {/* ─────────────────────────────────────────────────────────────────── */}
-        {/* MENÚ DE SECCIONES (siempre visible) */}
+        {/* ──────────────────────────────────────────────────── */}
+        {/* MENÚ DE SECCIONES */}
         <div className="flex justify-center gap-4 mb-6">
           {Object.keys(sections).map((key) => (
             <button
               key={key}
               onClick={() => {
                 setSection(key);
-                // Cuando seleccionamos una sección, reiniciamos pregunta, puntaje y respuestas
                 setCurrent(0);
                 setScore(0);
                 setAnswers([]);
                 setSelectedOption("");
                 setShowFeedback(false);
               }}
-              className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
                 section === key
                   ? "bg-gray-200 text-black"
-                  : "bg-white text-black hover:bg-gray-300"
+                  : "bg-gray-800 text-gray-100 hover:bg-gray-700"
               }`}
             >
               {key}
             </button>
           ))}
         </div>
-        {/* ─────────────────────────────────────────────────────────────────── */}
 
-        {/* Si no hay sección seleccionada aún, mostramos el mensaje de intro */}
+        {/* ──────────────────────────────────────────────────── */}
+        {/* SIN SECCIÓN ELEGIDA: Mensaje “Seleccioná una categoría” */}
         {section === "" ? (
           <div className="text-center text-gray-400">
-            <p>Seleccioná una de las tres opciones para comenzar el quiz.</p>
+            <p>Seleccioná una categoría para comenzar el quiz</p>
           </div>
         ) : (
-          // Si sí hay sección elegida, arrancamos con las preguntas o resultado final
           <>
+            {/* ──────────────────────────────────────────────────── */}
+            {/* SI current < questions.length → mostrar pregunta actual */}
             {current < questions.length ? (
-              /* ──────────────────────────────────────────────────────────── */
-              /* BLOQUE DE PREGUNTA ACTUAL */
-              /* ──────────────────────────────────────────────────────────── */
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={current}
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
-                  transition={{ duration: 0.5 }}
-                  className="mb-6"
-                >
-                  {/* Texto de la pregunta */}
-                  <h2 className="text-xl mb-4 text-gray-300">
-                    {currentQuestion.question}
-                  </h2>
-
-                  {/* Opciones */}
-                  <div className="space-y-4">
-                    {currentQuestion.options.map((opt, idx) => {
-                      // definimos clases de cada botón según si es feedback o no
-                      let buttonClass =
-                        "block w-full text-left px-5 py-3 rounded-xl shadow-md transition-colors duration-300 ";
-                      if (!showFeedback) {
-                        // aún no hay feedback: estado normal
-                        buttonClass +=
-                          "bg-gray-800 text-gray-100 hover:bg-white hover:text-black";
-                      } else {
-                        // ya respondimos: pintar según correcto/incorrecto
-                        if (opt === currentQuestion.answer) {
-                          // esta es la respuesta correcta
-                          buttonClass += "bg-green-600 text-white";
-                        } else if (opt === selectedOption) {
-                          // esta es la opción que eligió el usuario (y es incorrecta)
-                          buttonClass += "bg-red-600 text-white";
-                        } else {
-                          // las otras opciones (neutro)
-                          buttonClass += "bg-gray-800 text-gray-100 opacity-50";
-                        }
-                      }
-
-                      return (
-                        <button
-                          key={idx}
-                          onClick={() => handleAnswer(opt)}
-                          className={buttonClass}
-                          disabled={showFeedback} // si ya mostramos feedback, deshabilitamos el botón
-                        >
-                          {opt}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Si ya respondimos, mostramos justificación y botón “Siguiente” */}
-                  {showFeedback && (
-                    <div className="mt-6 bg-[#222] p-4 rounded-xl">
-                      <p className="text-sm text-gray-200 italic">
-                        💡 {currentQuestion.justification}
-                      </p>
-                      <button
-                        onClick={handleNext}
-                        className="mt-4 bg-yellow-500 text-black px-6 py-2 rounded-lg font-semibold hover:bg-yellow-600 transition"
-                      >
-                        Siguiente
-                      </button>
-                    </div>
-                  )}
-
-                  {/* Contador de preguntas */}
-                  <p className="text-sm text-right text-gray-400 mt-4">
+              <div className="space-y-6">
+                {/* ───── CABECERA DE LA PREGUNTA (Número + Score) ───── */}
+                <div className="flex justify-between items-center text-sm text-gray-400">
+                  {/* Pregunta X de Y */}
+                  <span>
                     Pregunta {current + 1} de {questions.length}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-            ) : (
-              /* ──────────────────────────────────────────────────────────── */
-              /* BLOQUE DE RESULTADO FINAL (cuando current === questions.length) */
-              /* ──────────────────────────────────────────────────────────── */
-              <div className="text-center">
-                <h2 className="text-2xl font-bold text-gray-100 mb-4">
-                  Resultado Final
+                  </span>
+                  {/* Puntuación: aciertos / total */}
+                  <span>
+                    Puntuación: {score} / {questions.length}
+                  </span>
+                </div>
+
+                {/* ───── BARRA DE PROGRESO ───── */}
+                <div className="w-full bg-gray-700 h-2 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-white"
+                    style={{
+                      width: `${((current + 1) / questions.length) * 100}%`
+                    }}
+                  ></div>
+                </div>
+
+                {/* ───── TEXTO DE LA PREGUNTA ───── */}
+                <h2 className="text-lg font-medium text-gray-100">
+                  {currentQuestion.question}
                 </h2>
-                <p className="mb-2">
-                  Puntaje: {score} / {questions.length}
-                </p>
-                <p className="mb-6">
-                  {score >= questions.length * 0.7
-                    ? "¡Promocionado!"
-                    : score >= questions.length * 0.4
-                    ? "¡Aprobado!"
-                    : "No aprobado. Volvé a intentar."}
-                </p>
-                <div className="text-left space-y-4">
+
+                {/* ───── OPCIONES ───── */}
+                <div className="flex flex-col gap-3">
+                  {currentQuestion.options.map((opt, idx) => {
+                    // Definición de clases dinámicas
+                    let baseClass =
+                      "flex items-center w-full border rounded-lg px-4 py-3 transition-colors duration-200 ";
+
+                    if (!showFeedback) {
+                      // Antes de responder: borde gris, fondo gris oscuro
+                      baseClass +=
+                        "border-gray-700 bg-gray-800 text-gray-100 hover:border-white hover:bg-gray-700";
+                    } else {
+                      // Después de responder: colorear
+                      if (opt === currentQuestion.answer) {
+                        // Respuesta correcta → borde y fondo verde
+                        baseClass +=
+                          "bg-green-700 border-green-600 text-white";
+                      } else if (opt === selectedOption) {
+                        // Opción elegida y es incorrecta → borde y fondo rojo
+                        baseClass += "bg-red-700 border-red-600 text-white";
+                      } else {
+                        // Resto de opciones → opacas
+                        baseClass +=
+                          "bg-gray-800 border-gray-700 text-gray-400 opacity-70";
+                      }
+                    }
+
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => handleAnswer(opt)}
+                        className={baseClass}
+                        disabled={showFeedback}
+                      >
+                        {/* “Radio button” ficticio */}
+                        <span
+                          className={`mr-3 flex-shrink-0 h-5 w-5 rounded-full border-2 ${
+                            !showFeedback
+                              ? "border-gray-500"
+                              : opt === currentQuestion.answer
+                              ? "border-green-400 bg-green-400"
+                              : opt === selectedOption
+                              ? "border-red-400 bg-red-400"
+                              : "border-gray-500 bg-gray-800"
+                          }`}
+                        ></span>
+                        <span className="text-left">{opt}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* ───── JUSTIFICACIÓN + BOTÓN “Continuar” ───── */}
+                {showFeedback && (
+                  <div className="mt-4 bg-gray-900 p-4 rounded-lg space-y-4">
+                    <p className="text-sm italic text-gray-300">
+                      💡 {currentQuestion.justification}
+                    </p>
+                    <button
+                      onClick={handleNext}
+                      className="w-full bg-white text-black font-medium py-2 rounded-lg hover:bg-gray-200 transition"
+                    >
+                      Continuar
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* ──────────────────────────────────────────────────── */
+              /* RESULTADO FINAL: cuando current === questions.length */
+              /* ──────────────────────────────────────────────────── */
+              <div className="space-y-6">
+                {/* ───── TARJETA DE RESULTADOS ───── */}
+                <div className="bg-gray-900 border border-gray-700 rounded-lg p-6 space-y-4">
+                  <h2 className="text-2xl font-semibold text-gray-100">
+                    Resultados Finales
+                  </h2>
+                  <p className="text-xl font-bold text-yellow-500">
+                    {(score / questions.length) * 10 >= 0
+                      ? ((score / questions.length) * 10).toFixed(1)
+                      : "0.0"}{" "}
+                    / 10
+                  </p>
+
+                  <p className="text-gray-300">
+                    {score >= questions.length * 0.7
+                      ? "¡Promocionado!"
+                      : score >= questions.length * 0.4
+                      ? "¡Aprobado!"
+                      : "No aprobado. Volvé a intentar."}
+                  </p>
+
+                  {/* ───── BARRA DE PROGRESO FINAL ───── */}
+                  <div className="w-full bg-gray-700 h-2 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-green-500"
+                      style={{
+                        width: `${(score / questions.length) * 100}%`
+                      }}
+                    ></div>
+                  </div>
+                  <p className="text-sm text-gray-400">
+                    Respuestas correctas: {score} de {questions.length} | Nota
+                    mínima para aprobar 7.0
+                  </p>
+                </div>
+
+                {/* ───── LISTADO DE RESULTADOS POR PREGUNTA ───── */}
+                <div className="flex flex-col gap-4">
                   {answers.map((ans, i) => (
                     <div
                       key={i}
-                      className={`p-4 rounded-xl ${
-                        ans.correct ? "bg-green-800" : "bg-red-800"
+                      className={`p-4 border rounded-lg ${
+                        ans.correct
+                          ? "border-green-600 bg-green-950"
+                          : "border-red-600 bg-red-950"
                       }`}
                     >
-                      <p className="font-semibold text-white">{ans.question}</p>
-                      <p className="text-sm">Tu respuesta: {ans.selected}</p>
-                      <p className="text-sm">
-                        Correcta: {questions[i].answer}
+                      <p className="font-medium text-gray-100">
+                        {i + 1}. {ans.question}
                       </p>
-                      <p className="text-xs text-gray-300 mt-1 italic">
+                      <p
+                        className={`mt-2 text-sm ${
+                          ans.correct ? "text-green-400" : "text-red-400"
+                        }`}
+                      >
+                        Tu respuesta: {ans.selected}{" "}
+                        {ans.correct ? "(Correcta)" : "(Incorrecta)"}
+                      </p>
+                      {!ans.correct && (
+                        <p className="mt-1 text-sm text-green-400">
+                          Respuesta correcta: {questions[i].answer}
+                        </p>
+                      )}
+                      <p className="mt-1 text-xs italic text-gray-300">
                         💡 Justificación: {ans.justification}
                       </p>
                     </div>
                   ))}
                 </div>
+
+                {/* ───── BOTÓN “Volver al menú” ───── */}
                 <button
                   onClick={resetQuiz}
-                  className="mt-6 bg-yellow-500 text-black px-6 py-2 rounded-lg font-semibold hover:bg-yellow-600 transition"
+                  className="w-full bg-white text-black font-medium py-2 rounded-lg hover:bg-gray-200 transition"
                 >
                   Volver al menú
                 </button>
