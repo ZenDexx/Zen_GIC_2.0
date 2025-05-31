@@ -740,32 +740,60 @@ export default function QuizGIC() {
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState([]);
+  // trackea cuál opción eligió el usuario en la pregunta actual
+  const [selectedOption, setSelectedOption] = useState("");
+  // al responder, mostramos feedback; hasta que no haga clic en “Siguiente” no avanzamos
+  const [showFeedback, setShowFeedback] = useState(false);
 
-  // Si section === "" entonces la variable questions es indefinida; chequeamos más abajo
+  // Si section === "" entonces questions = []
   const questions = section ? sections[section] : [];
   const currentQuestion = questions[current];
 
-  const handleAnswer = (option) => {
-    const correct = option === currentQuestion.answer;
-    if (correct) setScore((s) => s + 1);
+  // Cuando el usuario elige una opción
+  const handleAnswer = (opt) => {
+    if (showFeedback) return; // si ya estamos mostrando feedback, bloqueamos clicks adicionales
+    setSelectedOption(opt);
+    setShowFeedback(true);
+
+    const correct = opt === currentQuestion.answer;
+    if (correct) {
+      setScore((s) => s + 1);
+    }
+
+    // Almacenamos la respuesta en el array
     setAnswers((arr) => [
       ...arr,
       {
         question: currentQuestion.question,
-        selected: option,
+        selected: opt,
         correct,
         justification: currentQuestion.justification
       }
     ]);
+  };
+
+  // Cuando el usuario hace clic en “Siguiente”
+  const handleNext = () => {
+    setShowFeedback(false);
+    setSelectedOption("");
+
+    // Si no es la última pregunta, avanzamos
     if (current + 1 < questions.length) {
+      setCurrent((c) => c + 1);
+    } else {
+      // Si era la última, marcamos current = questions.length para mostrar el resultado final
       setCurrent((c) => c + 1);
     }
   };
 
+  // Resetear todo y volver al menú
   const resetQuiz = () => {
+    setSection("");
     setCurrent(0);
     setScore(0);
     setAnswers([]);
+    setSelectedOption("");
+    setShowFeedback(false);
   };
 
   return (
@@ -773,15 +801,20 @@ export default function QuizGIC() {
       <div className="max-w-3xl mx-auto bg-[#111] p-6 rounded-2xl shadow-2xl">
         <h1 className="text-4xl font-bold text-center text-gray-100 mb-4">Quiz GIC</h1>
 
-        {/* ─────────────────────────────────────────────────────── */}
-        {/* 2) Menú de botones siempre visible, incluso si section=="" */}
+        {/* ─────────────────────────────────────────────────────────────────── */}
+        {/* MENÚ DE SECCIONES (siempre visible) */}
         <div className="flex justify-center gap-4 mb-6">
           {Object.keys(sections).map((key) => (
             <button
               key={key}
               onClick={() => {
-                setSection(key);   // selecciona la sección
-                resetQuiz();       // reinicia preguntas/puntaje
+                setSection(key);
+                // Cuando seleccionamos una sección, reiniciamos pregunta, puntaje y respuestas
+                setCurrent(0);
+                setScore(0);
+                setAnswers([]);
+                setSelectedOption("");
+                setShowFeedback(false);
               }}
               className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
                 section === key
@@ -793,20 +826,20 @@ export default function QuizGIC() {
             </button>
           ))}
         </div>
-        {/* ─────────────────────────────────────────────────────── */}
+        {/* ─────────────────────────────────────────────────────────────────── */}
 
-        {/* 3) Si aún no se seleccionó ninguna sección, NO mostramos preguntas ni resultados */}
+        {/* Si no hay sección seleccionada aún, mostramos el mensaje de intro */}
         {section === "" ? (
           <div className="text-center text-gray-400">
             <p>Seleccioná una de las tres opciones para comenzar el quiz.</p>
           </div>
         ) : (
-          // ─────────────────────────────────────────────────────────
-          // 4) Aquí va TODO el bloque que ya tenías de preguntas + resultado
-          //    (solo se renderiza si 'section' NO está vacío)
-          // ─────────────────────────────────────────────────────────
+          // Si sí hay sección elegida, arrancamos con las preguntas o resultado final
           <>
             {current < questions.length ? (
+              /* ──────────────────────────────────────────────────────────── */
+              /* BLOQUE DE PREGUNTA ACTUAL */
+              /* ──────────────────────────────────────────────────────────── */
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current}
@@ -816,26 +849,73 @@ export default function QuizGIC() {
                   transition={{ duration: 0.5 }}
                   className="mb-6"
                 >
+                  {/* Texto de la pregunta */}
                   <h2 className="text-xl mb-4 text-gray-300">
                     {currentQuestion.question}
                   </h2>
+
+                  {/* Opciones */}
                   <div className="space-y-4">
-                    {currentQuestion.options.map((opt, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => handleAnswer(opt)}
-                        className="block w-full text-left px-5 py-3 bg-gray-800 text-gray-100 hover:bg-white hover:text-black transition-colors duration-300 rounded-xl shadow-md"
-                      >
-                        {opt}
-                      </button>
-                    ))}
+                    {currentQuestion.options.map((opt, idx) => {
+                      // definimos clases de cada botón según si es feedback o no
+                      let buttonClass =
+                        "block w-full text-left px-5 py-3 rounded-xl shadow-md transition-colors duration-300 ";
+                      if (!showFeedback) {
+                        // aún no hay feedback: estado normal
+                        buttonClass +=
+                          "bg-gray-800 text-gray-100 hover:bg-white hover:text-black";
+                      } else {
+                        // ya respondimos: pintar según correcto/incorrecto
+                        if (opt === currentQuestion.answer) {
+                          // esta es la respuesta correcta
+                          buttonClass += "bg-green-600 text-white";
+                        } else if (opt === selectedOption) {
+                          // esta es la opción que eligió el usuario (y es incorrecta)
+                          buttonClass += "bg-red-600 text-white";
+                        } else {
+                          // las otras opciones (neutro)
+                          buttonClass += "bg-gray-800 text-gray-100 opacity-50";
+                        }
+                      }
+
+                      return (
+                        <button
+                          key={idx}
+                          onClick={() => handleAnswer(opt)}
+                          className={buttonClass}
+                          disabled={showFeedback} // si ya mostramos feedback, deshabilitamos el botón
+                        >
+                          {opt}
+                        </button>
+                      );
+                    })}
                   </div>
+
+                  {/* Si ya respondimos, mostramos justificación y botón “Siguiente” */}
+                  {showFeedback && (
+                    <div className="mt-6 bg-[#222] p-4 rounded-xl">
+                      <p className="text-sm text-gray-200 italic">
+                        💡 {currentQuestion.justification}
+                      </p>
+                      <button
+                        onClick={handleNext}
+                        className="mt-4 bg-yellow-500 text-black px-6 py-2 rounded-lg font-semibold hover:bg-yellow-600 transition"
+                      >
+                        Siguiente
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Contador de preguntas */}
                   <p className="text-sm text-right text-gray-400 mt-4">
                     Pregunta {current + 1} de {questions.length}
                   </p>
                 </motion.div>
               </AnimatePresence>
             ) : (
+              /* ──────────────────────────────────────────────────────────── */
+              /* BLOQUE DE RESULTADO FINAL (cuando current === questions.length) */
+              /* ──────────────────────────────────────────────────────────── */
               <div className="text-center">
                 <h2 className="text-2xl font-bold text-gray-100 mb-4">
                   Resultado Final
@@ -858,9 +938,7 @@ export default function QuizGIC() {
                         ans.correct ? "bg-green-800" : "bg-red-800"
                       }`}
                     >
-                      <p className="font-semibold text-white">
-                        {ans.question}
-                      </p>
+                      <p className="font-semibold text-white">{ans.question}</p>
                       <p className="text-sm">Tu respuesta: {ans.selected}</p>
                       <p className="text-sm">
                         Correcta: {questions[i].answer}
@@ -875,7 +953,7 @@ export default function QuizGIC() {
                   onClick={resetQuiz}
                   className="mt-6 bg-yellow-500 text-black px-6 py-2 rounded-lg font-semibold hover:bg-yellow-600 transition"
                 >
-                  Reintentar
+                  Volver al menú
                 </button>
               </div>
             )}
